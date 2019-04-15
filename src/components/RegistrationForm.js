@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { register } from '../actions'
 
 class RegistrationForm extends Component {
   state = {
     credentials: {
-      name: '',
-      companyName: '',
+      first_name: '',
+      last_name: '',
+      company: '',
       email: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     }
   }
 
@@ -22,6 +23,13 @@ class RegistrationForm extends Component {
     })
   }
 
+  onSubmit = e => {
+    e.preventDefault()
+    this.props.register(this.state.credentials).then(() => {
+      this.props.history.push('/login')
+    })
+  }
+
   render() {
     return (
       <div>
@@ -29,26 +37,35 @@ class RegistrationForm extends Component {
           Get started by creating your account, or{' '}
           <Link to="/login">logging in</Link> if you already have one.
         </p>
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div>
             <h3>User Registration</h3>
           </div>
-          <label for="name">Name *</label>
+          <label for="first_name">First Name *</label>
           <input
-            id="name"
+            id="first_name"
             type="text"
-            name="name"
-            placeholder="Your name"
-            value={this.state.credentials.name}
+            name="first_name"
+            placeholder="First Name"
+            value={this.state.credentials.first_name}
             onChange={this.handleChanges}
           />
-          <label for="companyName">Company Name *</label>
+          <label for="last_name">Last Name *</label>
           <input
-            id="companyName"
+            id="last_name"
             type="text"
-            name="companyName"
+            name="last_name"
+            placeholder="Last Name"
+            value={this.state.credentials.last_name}
+            onChange={this.handleChanges}
+          />
+          <label for="company">Company Name *</label>
+          <input
+            id="company"
+            type="text"
+            name="company"
             placeholder="Company Name"
-            value={this.state.credentials.companyName}
+            value={this.state.credentials.company}
             onChange={this.handleChanges}
           />
           <label for="email">Email *</label>
@@ -69,22 +86,15 @@ class RegistrationForm extends Component {
             value={this.state.credentials.password}
             onChange={this.handleChanges}
           />
-          <label for="confirmPassword">Confirm Password *</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={this.state.credentials.confirmPassword}
-            onChange={this.handleChanges}
-          />
-        </form>
-        <div>
           <button>Submit</button>
-        </div>
+        </form>
+        <div />
       </div>
     )
   }
 }
 
-export default RegistrationForm
+export default connect(
+  null,
+  { register }
+)(RegistrationForm)
