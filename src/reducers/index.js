@@ -8,8 +8,6 @@ import {
 } from '../actions'
 
 const initialState = {
-  first_name: '',
-  last_name: '',
   error: null,
   loggingIn: false,
   fetchingProjects: false,
@@ -35,6 +33,24 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
         registering: false
+      }
+    case LOGIN_START:
+      return {
+        ...state,
+        error: '',
+        loggingIn: true
+      }
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        loggingIn: false
+      }
+    case LOGIN_FAILED:
+      return {
+        ...state,
+        error: action.payload,
+        loggingIn: false
       }
     default:
       return state

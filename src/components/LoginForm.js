@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { login } from '../actions'
 
 class LoginForm extends Component {
   state = {
     credentials: {
-      name: '',
-      companyName: '',
+      email: '',
       password: ''
     }
   }
@@ -20,10 +20,17 @@ class LoginForm extends Component {
     })
   }
 
+  onLogin = e => {
+    e.preventDefault()
+    this.props.login(this.state.credentials).then(() => {
+      this.props.history.push('/dashboard')
+    })
+  }
+
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.onLogin}>
           <div>
             <h3>Sign In</h3>
             <p>
@@ -31,22 +38,13 @@ class LoginForm extends Component {
               <Link to="/register">Create one here.</Link>
             </p>
           </div>
-          <label for="name">Name</label>
+          <label for="email">Email</label>
           <input
-            id="name"
+            id="email"
             type="text"
-            name="name"
-            placeholder="Your name"
-            value={this.state.credentials.name}
-            onChange={this.handleChanges}
-          />
-          <label for="companyName">Company Name</label>
-          <input
-            id="companyName"
-            type="text"
-            name="companyName"
-            placeholder="Company Name"
-            value={this.state.credentials.companyName}
+            name="email"
+            placeholder="Your Email"
+            value={this.state.credentials.email}
             onChange={this.handleChanges}
           />
           <label for="password">Password</label>
@@ -58,13 +56,15 @@ class LoginForm extends Component {
             value={this.state.credentials.password}
             onChange={this.handleChanges}
           />
-        </form>
-        <div>
           <button>Log In</button>
-        </div>
+        </form>
+        <div />
       </div>
     )
   }
 }
 
-export default LoginForm
+export default connect(
+  null,
+  { login }
+)(LoginForm)
