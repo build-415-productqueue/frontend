@@ -1,5 +1,6 @@
 const initialState = {
-  users: [],
+  user: {},
+  userProjects: [],
   error: null
 }
 
