@@ -23,6 +23,7 @@ class App extends Component {
           <PrivateRoute exact path="/add-project" component={AddProjectForm} />
           <PrivateRoute exact path="/project-details/:id" component={Project} />
           <Footer />
+          <Link to="/account">Test</Link>
         </div>
       </Router>
     )

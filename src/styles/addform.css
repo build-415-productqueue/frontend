@@ -1,0 +1,83 @@
+div .addform {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 150px 150px 50px;
+    padding: 50px 75px;
+    background: white;
+}
+
+div .addform form {
+    display: flex;
+    flex-flow: column nowrap;
+    background: white;
+}
+
+div .addform form .addheader{
+    margin-bottom: 25px;
+}
+
+div .addform form label {
+    margin-bottom: 10px;
+}
+
+div .addform form input {
+    font-family: inherit;
+    padding: 5px 4px;
+    letter-spacing: normal;
+    color: black;
+    height: auto;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-radius: 2px;
+    background: #fafafa;
+    box-shadow: none;
+    transition: all .2s linear;
+    margin-bottom: 25px;
+    height: 35px;
+    width: 50%;
+}
+
+div .addform form input:focus {
+    outline: none;
+    background:white;
+}
+
+div .addform form button {
+    border-radius: 2px;
+    padding: 10px 40px;
+    margin-top: 10px;
+    color: #ffffff;
+    border-color: #a00100;
+    background-color: #a00100;
+    border: none;
+    outline: none;
+    text-align: center;
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+}
+
+div .addform form button:hover {
+    background: #333;
+    border-color: #333;
+}
+
+textarea {
+    font-family: inherit;
+    padding: 5px 4px;
+    letter-spacing: normal;
+    color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-radius: 2px;
+    background: #fafafa;
+    box-shadow: none;
+    transition: all .2s linear;
+    margin-bottom: 25px;
+    height: 155px;
+    width: 50%;
+    outline: none;
+}

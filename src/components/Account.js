@@ -13,11 +13,24 @@ class Account extends Component {
       error: false,
       success: false,
       user: {
-        email: 'test@test.com',
-        company: 'Test',
-        name: 'Test Testing'
+        email: '',
+        company: '',
+        first_name: '',
+        last_name: ''
       }
     }
+  }
+
+  componentDidMount() {
+    const { email, company, first_name, last_name } = this.props.user
+    this.setState({
+      user: {
+        email: email,
+        company: company,
+        first_name: first_name,
+        last_name: last_name
+      }
+    })
   }
 
   changeHandler = e => {
@@ -32,11 +45,13 @@ class Account extends Component {
 
   editHandler = () => {
     if (!this.state.disabled) {
+      const { email, first_name, company, last_name } = this.props.user
       this.setState({
         user: {
-          email: this.state.user.email,
-          name: this.state.user.name,
-          company: this.state.user.company
+          email: email,
+          first_name: first_name,
+          last_name: last_name,
+          company: company
         },
         disabled: true
       })
@@ -63,13 +78,23 @@ class Account extends Component {
               {this.state.disabled ? 'EDIT' : 'CANCEL'}
             </p>
 
-            <label htmlFor="name">Name</label>
+            <label htmlFor="first_name">First Name</label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="first_name"
+              name="first_name"
               onChange={this.changeHandler}
-              defaultValue={this.state.user.name}
+              defaultValue={this.state.user.first_name}
+              disabled={this.state.disabled}
+            />
+
+            <label htmlFor="last_name">Last Name</label>
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              onChange={this.changeHandler}
+              defaultValue={this.state.user.last_name}
               disabled={this.state.disabled}
             />
 
@@ -102,4 +127,15 @@ class Account extends Component {
   }
 }
 
-export default Account
+const mapStateToProps = state => {
+  console.log(state.user)
+  return {
+    user: state.user,
+    token: state.user.token
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Account)
