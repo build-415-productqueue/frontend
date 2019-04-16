@@ -8,17 +8,14 @@ import '../styles/projects.css'
 
 class DashBoard extends Component {
   state = {
-    projects: [1, 2, 3, 4],
-    message: ''
+    projects: [1, 2, 3, 4]
   }
 
   componentDidMount() {
     axios
       .get(`${URL}`)
       .then(res => {
-        this.setState({
-          message: res.data.status
-        })
+        console.log(res)
       })
       .catch(err => {
         console.log(err)

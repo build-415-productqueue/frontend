@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import '../styles/regform.css'
 import propTypes from 'prop-types'
 import axios from 'axios'
 
@@ -32,9 +34,9 @@ class AccountDetails extends Component {
     if (!this.state.disabled) {
       this.setState({
         user: {
-          email: this.state.email,
-          name: this.state.name,
-          company: this.state.company
+          email: this.state.user.email,
+          name: this.state.user.name,
+          company: this.state.user.company
         },
         disabled: true
       })
@@ -47,11 +49,10 @@ class AccountDetails extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <h1>Hello, {this.state.user.name}</h1>
+      <div className="container">
+        <h1>Hello, {this.state.user.name}</h1>
+        <div className="regform">
           <fieldset disabled={this.state.disabled}>
-            <h1>User profile picture?</h1>
             <form>
               <p className="edit" onClick={() => this.editHandler()}>
                 {this.state.disabled ? 'EDIT' : 'CANCEL'}

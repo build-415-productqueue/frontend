@@ -12,8 +12,8 @@ export const login = creds => dispatch => {
     .post(`${URL}/api/users/login`, creds)
     .then(res => {
       localStorage.setItem('token', res.data.token)
-      // check if back end is returning entire user object
-      dispatch({ type: LOGIN_SUCCESS })
+      console.log(res.data)
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data })
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILED, payload: err })
