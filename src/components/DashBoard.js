@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 import { URL } from '../actions'
 import axios from 'axios'
 import ProjectCard from './ProjectCard'
+import '../styles/projects.css'
 
 class DashBoard extends Component {
   state = {
-    projects: [1, 2, 3],
+    projects: [1, 2, 3, 4],
     message: ''
   }
 
@@ -26,11 +27,11 @@ class DashBoard extends Component {
 
   render() {
     return (
-      <div>
-        <h1>{this.state.message ? this.state.message : 'hello'}</h1>
-        <div>
-          {this.state.projects.map(cards => (
-            <ProjectCard />
+      <div className="container">
+        <h1>Project Dashboard</h1>
+        <div className="projectlist">
+          {this.state.projects.map((project, i) => (
+            <ProjectCard key={i} card={project} />
           ))}
         </div>
       </div>

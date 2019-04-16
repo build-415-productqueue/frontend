@@ -1,0 +1,53 @@
+div .container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0px 75px;
+    margin: 150px 0;
+    height: 50vh;
+}
+
+div .container .projectlist {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+div .container .projectlist a {
+    color: inherit;
+    text-decoration: none;
+}
+
+div .container .projectlist .projectcard {
+    background: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-radius: 2px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+div .container .projectlist .projectcard span { 
+    margin: 0;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+div .container .projectlist .projectcard h1 { 
+    color: #a00100;
+    margin: 0 0 5px;
+    font-size: 22px;
+}
+
+div .container .projectlist .projectcard h6 { 
+    margin: 0;
+}
+
+div .container .projectlist .projectcard p { 
+    margin: 0 0 25px;
+}
