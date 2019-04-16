@@ -39,22 +39,30 @@ class LoginForm extends Component {
               <Link to="/">Create one here.</Link>
             </p>
           </div>
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             type="text"
             name="email"
             placeholder="Email Address"
-            value={this.state.credentials.email}
+            value={
+              this.props.location.state.email
+                ? this.props.location.state.email
+                : this.state.credentials.email
+            }
             onChange={this.handleChanges}
           />
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             id="password"
             type="password"
             name="password"
             placeholder="Password"
-            value={this.state.credentials.password}
+            value={
+              this.props.location.state.password
+                ? this.props.location.state.password
+                : this.state.credentials.password
+            }
             onChange={this.handleChanges}
           />
           <button>Log In</button>

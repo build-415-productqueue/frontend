@@ -6,7 +6,6 @@ import '../styles/regform.css'
 
 class RegistrationForm extends Component {
   state = {
-    name: '',
     credentials: {
       first_name: '',
       last_name: '',
@@ -14,12 +13,6 @@ class RegistrationForm extends Component {
       email: '',
       password: ''
     }
-  }
-
-  nameChange = e => {
-    this.setState({
-      name: e.target.value
-    })
   }
 
   handleChanges = e => {
@@ -33,15 +26,14 @@ class RegistrationForm extends Component {
 
   onSubmit = e => {
     e.preventDefault()
-    this.setState({
-      credentials: {
-        ...this.state.credentials,
-        first_name: this.state.name.split(' ')[0],
-        last_name: this.state.name.split(' ')[1]
-      }
-    })
     this.props.register(this.state.credentials).then(() => {
-      this.props.history.push('/login')
+      this.props.history.push({
+        pathname: '/login',
+        state: {
+          email: this.state.credentials.email,
+          password: this.state.credentials.password
+        }
+      })
     })
   }
 
@@ -57,18 +49,29 @@ class RegistrationForm extends Component {
             </p>
           </div>
           <>
-            <label for="name">Full Name *</label>
+            <label htmlFor="first_name">First Name *</label>
             <input
-              id="name"
+              id="first_name"
               type="text"
-              name="name"
-              placeholder="First & Last Name"
-              value={this.state.name}
-              onChange={this.nameChange}
+              name="first_name"
+              placeholder="First Name"
+              value={this.state.credentials.first_name}
+              onChange={this.handleChanges}
             />
           </>
           <>
-            <label for="company">Company Name *</label>
+            <label htmlFor="last_name">Last Name *</label>
+            <input
+              id="last_name"
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              value={this.state.credentials.last_name}
+              onChange={this.handleChanges}
+            />
+          </>
+          <>
+            <label htmlFor="company">Company Name *</label>
             <input
               id="company"
               type="text"
@@ -79,7 +82,7 @@ class RegistrationForm extends Component {
             />
           </>
           <>
-            <label for="email">Email *</label>
+            <label htmlFor="email">Email *</label>
             <input
               id="email"
               type="text"
@@ -90,7 +93,7 @@ class RegistrationForm extends Component {
             />
           </>
           <>
-            <label for="password">Password *</label>
+            <label htmlFor="password">Password *</label>
             <input
               id="password"
               type="password"
