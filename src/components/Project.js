@@ -15,7 +15,8 @@ const Project = props => {
       </div>
       <div>
         <h2>Project Links</h2>
-        <h4>Figma: </h4>
+        <h4>Links: </h4>
+        <h4>Files: </h4>
         <h4>GitHub Repo: </h4>
         <h4>Heroku App: </h4>
       </div>
