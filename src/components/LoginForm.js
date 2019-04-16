@@ -35,7 +35,7 @@ class LoginForm extends Component {
             <h3>Sign In</h3>
             <p>
               Sign in below to access your dashboard. Don't have an account yet?{' '}
-              <Link to="/register">Create one here.</Link>
+              <Link to="/">Create one here.</Link>
             </p>
           </div>
           <label for="email">Email</label>

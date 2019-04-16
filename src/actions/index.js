@@ -29,7 +29,6 @@ export const register = creds => dispatch => {
   return axios
     .post(`${URL}/api/users/register`, creds)
     .then(res => {
-      console.log(res)
       localStorage.setItem('token', res.data.token)
       dispatch({ type: REGISTER_SUCCESS })
     })
