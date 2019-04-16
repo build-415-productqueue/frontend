@@ -6,7 +6,7 @@ import PrivateRoute from './components/PrivateRoute'
 import DashBoard from './components/DashBoard'
 import Project from './components/Project'
 import AddProjectForm from './components/AddProjectForm'
-import AccountDetails from './components/AccountDetails'
+import Account from './components/Account'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 
@@ -18,11 +18,7 @@ class App extends Component {
           <Nav />
           <Route exact path="/" component={RegistrationForm} />
           <Route path="/login" component={LoginForm} />
-          <PrivateRoute
-            exact
-            path="/account/details"
-            component={AccountDetails}
-          />
+          <PrivateRoute exact path="/account" component={Account} />
           <PrivateRoute exact path="/dashboard" component={DashBoard} />
           <PrivateRoute exact path="/add-project" component={AddProjectForm} />
           <PrivateRoute exact path="/project-details/:id" component={Project} />
