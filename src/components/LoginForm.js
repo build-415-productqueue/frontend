@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { login } from '../actions'
+import '../styles/regform.css'
 
 class LoginForm extends Component {
   state = {
@@ -29,9 +30,9 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="regform">
         <form onSubmit={this.onLogin}>
-          <div>
+          <div className="regheader">
             <h3>Sign In</h3>
             <p>
               Sign in below to access your dashboard. Don't have an account yet?{' '}
@@ -43,7 +44,7 @@ class LoginForm extends Component {
             id="email"
             type="text"
             name="email"
-            placeholder="Your Email"
+            placeholder="Email Address"
             value={this.state.credentials.email}
             onChange={this.handleChanges}
           />
@@ -52,7 +53,7 @@ class LoginForm extends Component {
             id="password"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             value={this.state.credentials.password}
             onChange={this.handleChanges}
           />

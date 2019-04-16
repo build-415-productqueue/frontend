@@ -7,12 +7,14 @@ import DashBoard from './components/DashBoard'
 import Project from './components/Project'
 import AddProjectForm from './components/AddProjectForm'
 import AccountDetails from './components/AccountDetails'
+import Nav from './components/Nav'
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div className="App">
+          <Nav />
           <Route exact path="/" component={RegistrationForm} />
           <Route path="/login" component={LoginForm} />
           <PrivateRoute
