@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import '../styles/addform.css'
 
 class AddProjectForm extends Component {
   state = {
     input: {
       project_name: '',
       description: '',
-      link: '',
-      file: '',
-      image: ''
+      links: '',
+      files: '',
+      images: ''
     }
   }
 
@@ -23,10 +24,12 @@ class AddProjectForm extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <form>
+      <div className="addform">
+        <form>
+          <div className="addheader">
             <h2>Upload a project!</h2>
+          </div>
+          <>
             <label for="project_name">Project Name</label>
             <input
               id="project_name"
@@ -37,6 +40,8 @@ class AddProjectForm extends Component {
               onChange={this.handleChanges}
               required
             />
+          </>
+          <>
             <label for="description">Description</label>
             <textarea
               id="description"
@@ -47,7 +52,9 @@ class AddProjectForm extends Component {
               onChange={this.handleChanges}
               required
             />
-            <label for="link">link</label>
+          </>
+          <>
+            <label for="link">links</label>
             <input
               id="link"
               type="text"
@@ -55,25 +62,31 @@ class AddProjectForm extends Component {
               value={this.state.input.link}
               onChange={this.handleChanges}
             />
+          </>
+          <>
             <label for="file">File Upload</label>
             <input
               id="file"
               type="file"
               name="file"
+              multiple
               value={this.state.input.file}
               onChange={this.handleChanges}
             />
-            <label for="image">Image</label>
+          </>
+          <>
+            <label for="image">Images</label>
             <input
               id="image"
               type="file"
               name="image"
+              multiple
               value={this.state.input.image}
               onChange={this.handleChanges}
             />
-            <button>Submit</button>
-          </form>
-        </div>
+          </>
+          <button>Submit</button>
+        </form>
       </div>
     )
   }
