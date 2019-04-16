@@ -8,6 +8,7 @@ import Project from './components/Project'
 import AddProjectForm from './components/AddProjectForm'
 import AccountDetails from './components/AccountDetails'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
           <PrivateRoute exact path="/dashboard" component={DashBoard} />
           <PrivateRoute exact path="/add-project" component={AddProjectForm} />
           <PrivateRoute exact path="/project-details/:id" component={Project} />
+          <Footer />
         </div>
       </Router>
     )
