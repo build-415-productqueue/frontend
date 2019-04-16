@@ -12,6 +12,28 @@ class LoginForm extends Component {
     }
   }
 
+  componentDidMount = () => {
+    if (this.props.location.state) {
+      if (this.props.location.state.email) {
+        this.setState({
+          credentials: {
+            ...this.state.credentials,
+            email: this.props.location.state.email
+          }
+        })
+      }
+
+      if (this.props.location.state.password) {
+        this.setState({
+          credentials: {
+            ...this.state.credentials,
+            password: this.props.location.state.password
+          }
+        })
+      }
+    }
+  }
+
   handleChanges = e => {
     this.setState({
       credentials: {
@@ -45,11 +67,7 @@ class LoginForm extends Component {
             type="text"
             name="email"
             placeholder="Email Address"
-            value={
-              this.props.location.state.email
-                ? this.props.location.state.email
-                : this.state.credentials.email
-            }
+            value={this.state.credentials.email}
             onChange={this.handleChanges}
           />
           <label htmlFor="password">Password</label>
@@ -58,11 +76,7 @@ class LoginForm extends Component {
             type="password"
             name="password"
             placeholder="Password"
-            value={
-              this.props.location.state.password
-                ? this.props.location.state.password
-                : this.state.credentials.password
-            }
+            value={this.state.credentials.password}
             onChange={this.handleChanges}
           />
           <button>Log In</button>

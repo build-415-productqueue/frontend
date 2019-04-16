@@ -17,6 +17,14 @@ div .regform form .regheader{
     margin-bottom: 25px;
 }
 
+div .regform form .regheader p a{
+    color: #a00100;
+}
+
+div .regform form .regheader p a:hover{
+    color: #333;
+}
+
 div .regform form label {
     margin-bottom: 10px;
 }
@@ -37,6 +45,11 @@ div .regform form input {
     margin-bottom: 25px;
     height: 35px;
     width: 50%;
+}
+
+div .regform form input:focus {
+    outline: none;
+    background:white;
 }
 
 div .regform form button {
