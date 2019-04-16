@@ -14,19 +14,14 @@ class LoginForm extends Component {
 
   componentDidMount = () => {
     if (this.props.location.state) {
-      if (this.props.location.state.email) {
+      console.log(this.props.location.state)
+      if (
+        this.props.location.state.email &&
+        this.props.location.state.password
+      ) {
         this.setState({
           credentials: {
-            ...this.state.credentials,
-            email: this.props.location.state.email
-          }
-        })
-      }
-
-      if (this.props.location.state.password) {
-        this.setState({
-          credentials: {
-            ...this.state.credentials,
+            email: this.props.location.state.email,
             password: this.props.location.state.password
           }
         })

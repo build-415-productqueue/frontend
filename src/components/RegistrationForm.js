@@ -26,15 +26,15 @@ class RegistrationForm extends Component {
 
   onSubmit = e => {
     e.preventDefault()
-    // this.props.register(this.state.credentials).then(() => {
-    this.props.history.push({
-      pathname: '/login',
-      state: {
-        email: this.state.credentials.email,
-        password: this.state.credentials.password
-      }
+    this.props.register(this.state.credentials).then(() => {
+      this.props.history.push({
+        pathname: '/login',
+        state: {
+          email: this.state.credentials.email,
+          password: this.state.credentials.password
+        }
+      })
     })
-    // })
   }
 
   render() {
