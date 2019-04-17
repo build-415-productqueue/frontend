@@ -3,12 +3,15 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
 import '../styles/account.css'
+import { URL } from '../actions'
+import moment from 'moment'
 
 class Project extends Component {
   constructor(props) {
     super(props)
     this.state = {
       disabled: true,
+      info: {},
       project: {
         projectTitle: '',
         submittedBy: '',
@@ -18,14 +21,28 @@ class Project extends Component {
         dateSubmitted: '',
         lastUpdated: '',
         links: '',
-        github: '',
-        heroku: '',
         comments: []
       }
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    const token = localStorage.getItem('token')
+    const user = JSON.parse(localStorage.getItem('data'))
+    const projectId = this.props.match.params.id
+    axios
+      .get(`${URL}/api/projects/${user.id}/${projectId}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          info: res.data
+        })
+      })
+  }
 
   changeHandler = e => {
     this.setState({
@@ -48,8 +65,6 @@ class Project extends Component {
           dateSubmitted: '',
           lastUpdated: '',
           links: '',
-          github: '',
-          heroku: '',
           comments: []
         },
         disabled: true
@@ -73,73 +88,38 @@ class Project extends Component {
               {this.state.disabled ? 'EDIT' : 'CANCEL'}
             </p>
 
-            <h2>Project Title</h2>
-            <input
-              type="text"
-              id="projectTitle"
-              name="projectTitle"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.projectTitle}
-              disabled={this.state.disabled}
-            />
-
-            <label htmlFor="submittedBy">Submitted By:</label>
-            <input
-              type="text"
-              id="submittedBy"
-              name="submittedBy"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.submittedBy}
-              disabled={this.state.disabled}
-            />
-
-            <label htmlFor="company">Company:</label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.company}
-              disabled={this.state.disabled}
-            />
-
-            <label htmlFor="description"> Description:</label>
-            <input
-              type="text"
-              id="description"
-              name="description"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.description}
-              disabled={this.state.disabled}
-            />
-
+            <h2>{this.state.info.name}</h2>
+            <p>
+              {' '}
+              Date created:{' '}
+              {moment(
+                this.state.info.created_at,
+                'YYYY-MM-DDTkk:mm:ss.SSSZ'
+              ).format('MMMM Do YYYY')}{' '}
+              | Last Updated:
+            </p>
             <label htmlFor="status"> Status:</label>
             <input
               type="text"
               id="status"
               name="status"
               onChange={this.changeHandler}
-              defaultValue={this.state.project.status}
+              defaultValue={this.state.info.status}
               disabled={this.state.disabled}
             />
 
-            <label htmlFor="dateSubmitted"> Date Submitted:</label>
-            <input
-              type="text"
-              id="dateSubmitted"
-              name="dateSubmitted"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.dateSubmitted}
-              disabled={this.state.disabled}
-            />
+            <h6 htmlFor="submittedBy">Submitted By: </h6>
 
-            <label htmlFor="lastUpdated"> Last Updated:</label>
-            <input
+            <h6 htmlFor="company">Company:</h6>
+
+            <label htmlFor="description"> Description:</label>
+            <textarea
+              className="description"
               type="text"
-              id="lastUpdated"
-              name="lastUpdated"
+              id="description"
+              name="description"
               onChange={this.changeHandler}
-              defaultValue={this.state.project.lastUpdated}
+              defaultValue={this.state.info.description}
               disabled={this.state.disabled}
             />
 
@@ -151,7 +131,7 @@ class Project extends Component {
               id="links"
               name="links"
               onChange={this.changeHandler}
-              defaultValue={this.state.project.links}
+              defaultValue={this.state.info.links}
               disabled={this.state.disabled}
             />
 
@@ -161,7 +141,7 @@ class Project extends Component {
               id="github"
               name="github"
               onChange={this.changeHandler}
-              defaultValue={this.state.project.github}
+              defaultValue={this.state.info.github}
               disabled={this.state.disabled}
             />
 
@@ -171,7 +151,7 @@ class Project extends Component {
               id="heroku"
               name="heroku"
               onChange={this.changeHandler}
-              defaultValue={this.state.project.heroku}
+              defaultValue={this.state.info.heroku}
               disabled={this.state.disabled}
             />
             {this.state.disabled ? null : <button type="submit">Submit</button>}

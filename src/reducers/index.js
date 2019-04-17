@@ -10,7 +10,10 @@ import {
   FETCHING_DATA,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILED
+  UPDATE_USER_FAILED,
+  ADD_PROJECT_START,
+  ADD_PROJECT_SUCCESS,
+  ADD_PROJECT_FAILED
 } from '../actions'
 
 const initialState = {
@@ -20,7 +23,8 @@ const initialState = {
   fetchingProjects: false,
   registering: false,
   isLoggedIn: false,
-  updatingUser: false
+  updatingUser: false,
+  projectsAdded: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -102,6 +106,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         updatingUser: false,
+        error: action.payload
+      }
+    case ADD_PROJECT_START:
+      return {
+        ...state,
+        error: ''
+      }
+    case ADD_PROJECT_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        projectsAdded: action.payload
+      }
+    case ADD_PROJECT_FAILED:
+      return {
+        ...state,
         error: action.payload
       }
     default:

@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import { addProject } from '../actions'
+import { connect } from 'react-redux'
 import '../styles/addform.css'
 
 class AddProjectForm extends Component {
   state = {
+    linkCount: 2,
+    token: '',
+    userId: '',
     input: {
       project_name: '',
       description: '',
@@ -10,10 +15,23 @@ class AddProjectForm extends Component {
         link1: {
           link_type: '',
           link_href: ''
+        },
+        link2: {
+          link_type: '',
+          link_href: ''
         }
       },
       files: ''
     }
+  }
+
+  componentDidMount() {
+    const user = JSON.parse(localStorage.getItem('data'))
+    const token = localStorage.getItem('token')
+    this.setState({
+      token: token,
+      userId: user.id
+    })
   }
 
   linkChanges = e => {
@@ -31,6 +49,33 @@ class AddProjectForm extends Component {
     })
   }
 
+  addLink = e => {
+    e.preventDefault()
+    this.setState({
+      linkCount: this.state.linkCount + 1,
+      input: {
+        ...this.state.input,
+        links: {
+          ...this.state.input.links,
+          [`link${this.state.linkCount + 1}`]: {
+            link_type: '',
+            link_href: ''
+          }
+        }
+      }
+    })
+  }
+
+  submitAdd = e => {
+    e.preventDefault()
+    const project = {
+      name: this.state.input.project_name,
+      description: this.state.input.description,
+      links: Object.values(this.state.input.links)
+    }
+    this.props.addProject(project, this.state.userId, this.state.token)
+  }
+
   handleChanges = e => {
     this.setState({
       input: {
@@ -43,7 +88,7 @@ class AddProjectForm extends Component {
   render() {
     return (
       <div className="addform">
-        <form>
+        <form onSubmit={this.submitAdd}>
           <div className="addheader">
             <h2>Upload a project!</h2>
           </div>
@@ -72,25 +117,33 @@ class AddProjectForm extends Component {
             />
           </>
           <>
-            <label htmlFor="link">link to wireframe</label>
-            <input
-              id="link"
-              type="text"
-              name="link"
-              value={this.state.input.link}
-              onChange={this.handleChanges}
-            />
-          </>
-          <>
-            <label htmlFor="file">Link to Technical specification "Spec"</label>
-            <input
-              id="file"
-              type="text"
-              name="file"
-              multiple
-              value={this.state.input.file}
-              onChange={this.handleChanges}
-            />
+            <button onClick={this.addLink}>Add Link</button>
+            {Object.keys(this.state.input.links).map(link => (
+              <div key={link}>
+                <select
+                  id={link}
+                  value={this.state.input.links[link].link_type}
+                  onChange={this.linkChanges}
+                  name="link_type"
+                >
+                  <option defaultValue>Select Type</option>
+                  <option>Figma</option>
+                  <option>Sketch</option>
+                  <option>Dropbox</option>
+                  <option>Box</option>
+                  <option>Google Drive</option>
+                  <option>Office 365</option>
+                </select>
+                <input
+                  id={link}
+                  type="text"
+                  value={this.state.input.links[link].link_href}
+                  onChange={this.linkChanges}
+                  name="link_href"
+                  placeholder="Link URL"
+                />
+              </div>
+            ))}
           </>
 
           <button>Submit</button>
@@ -100,4 +153,7 @@ class AddProjectForm extends Component {
   }
 }
 
-export default AddProjectForm
+export default connect(
+  null,
+  { addProject }
+)(AddProjectForm)

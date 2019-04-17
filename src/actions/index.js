@@ -79,4 +79,16 @@ export const ADD_PROJECT_START = 'ADD_PROJECT_START'
 export const ADD_PROJECT_SUCCESS = 'ADD_PROJECT_SUCCESS'
 export const ADD_PROJECT_FAILED = 'ADD_PROJECT_FAILED'
 
-export const addProject = project => dispatch => {}
+export const addProject = (newProject, id, token) => dispatch => {
+  dispatch({ type: ADD_PROJECT_START })
+  return axios
+    .post(`${URL}/api/projects/${id}`, newProject, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: ADD_PROJECT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PROJECT_FAILED, payload: err.response })
+    })
+}
