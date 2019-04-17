@@ -48,3 +48,35 @@ export const logout = () => dispatch => {
   dispatch({ type: LOGOUT_SUCCESS })
   window.location.reload()
 }
+
+export const FETCHING_DATA = 'FETCHING_DATA'
+
+export const getData = data => dispatch => {
+  dispatch({ type: FETCHING_DATA, payload: data })
+}
+
+export const UPDATE_USER_START = 'UPDATE_USER_START'
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
+
+export const updateUser = (newUser, token) => dispatch => {
+  dispatch({ type: UPDATE_USER_START })
+  return axios
+    .put(`${URL}/api/users/${newUser.id}`, newUser, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: UPDATE_USER_SUCCESS, payload: res.data })
+      console.log(res.data)
+      localStorage.setItem('data', JSON.stringify(res.data))
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_USER_FAILED, payload: err.response })
+    })
+}
+
+export const ADD_PROJECT_START = 'ADD_PROJECT_START'
+export const ADD_PROJECT_SUCCESS = 'ADD_PROJECT_SUCCESS'
+export const ADD_PROJECT_FAILED = 'ADD_PROJECT_FAILED'
+
+export const addProject = project => dispatch => {}

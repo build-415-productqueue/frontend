@@ -6,9 +6,29 @@ class AddProjectForm extends Component {
     input: {
       project_name: '',
       description: '',
-      links: '',
+      links: {
+        link1: {
+          link_type: '',
+          link_href: ''
+        }
+      },
       files: ''
     }
+  }
+
+  linkChanges = e => {
+    this.setState({
+      input: {
+        ...this.state.input,
+        links: {
+          ...this.state.input.links,
+          [e.target.id]: {
+            ...this.state.input.links[e.target.id],
+            [e.target.name]: e.target.value
+          }
+        }
+      }
+    })
   }
 
   handleChanges = e => {

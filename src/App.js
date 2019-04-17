@@ -9,8 +9,17 @@ import AddProjectForm from './components/AddProjectForm'
 import Account from './components/Account'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { getData } from './actions'
 
 class App extends Component {
+  componentDidMount() {
+    if (localStorage.getItem('data')) {
+      this.props.getData(JSON.parse(localStorage.getItem('data')))
+    }
+  }
+
   render() {
     const RouterNav = withRouter(Nav)
     return (
@@ -30,4 +39,7 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(
+  null,
+  { getData }
+)(App)

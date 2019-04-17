@@ -3,38 +3,48 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
 import '../styles/account.css'
+import { updateUser } from '../actions'
 
 class Account extends Component {
   constructor(props) {
     super(props)
     this.state = {
       disabled: true,
-      loading: false,
-      error: false,
-      success: false,
       user: {
         email: '',
         company: '',
         first_name: '',
-        last_name: ''
-      }
+        last_name: '',
+        id: ''
+      },
+      token: ''
     }
   }
 
   componentDidMount() {
-    const { email, company, first_name, last_name } = this.props.user
+    const user = JSON.parse(localStorage.getItem('data'))
+    const token = localStorage.getItem('token')
     this.setState({
       user: {
-        email: email,
-        company: company,
-        first_name: first_name,
-        last_name: last_name
-      }
+        email: user.email,
+        company: user.company,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        id: user.id
+      },
+      token: token
+    })
+  }
+
+  updateUser = e => {
+    e.preventDefault()
+    this.props.updateUser(this.state.user, this.state.token)
+    this.setState({
+      disabled: true
     })
   }
 
   changeHandler = e => {
-    e.preventDefault()
     this.setState({
       user: {
         ...this.state.user,
@@ -66,7 +76,7 @@ class Account extends Component {
     return (
       <div className="accform">
         <fieldset disabled={this.state.disabled}>
-          <form>
+          <form onSubmit={this.updateUser}>
             <div className="accheader">
               <h3>Account Settings</h3>
               <p>Just hit the "Edit" button to change your account details.</p>
@@ -136,5 +146,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { updateUser }
 )(Account)

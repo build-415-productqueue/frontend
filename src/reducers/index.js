@@ -6,7 +6,11 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILED,
   LOGOUT,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  FETCHING_DATA,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED
 } from '../actions'
 
 const initialState = {
@@ -15,7 +19,8 @@ const initialState = {
   loggingIn: false,
   fetchingProjects: false,
   registering: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  updatingUser: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -73,6 +78,31 @@ const reducer = (state = initialState, action) => {
         error: '',
         user: {},
         isLoggedIn: false
+      }
+    case FETCHING_DATA:
+      return {
+        ...state,
+        user: action.payload,
+        error: ''
+      }
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        updatingUser: true,
+        error: ''
+      }
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        updatingUser: false,
+        error: ''
+      }
+    case UPDATE_USER_FAILED:
+      return {
+        ...state,
+        updatingUser: false,
+        error: action.payload
       }
     default:
       return state
