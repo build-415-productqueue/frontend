@@ -1,17 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/projects.css'
+import moment from 'moment'
 
 const ProjectCard = props => {
+  console.log(props.card)
   return (
-    //Change the :id (${id}), change localhost to netifly
-    <Link to={`/project-details/:id`}>
+    <Link to={`/project-details/${props.card.id}`}>
       <div className="projectcard">
-        <span className="status">Status</span>
-        <h1>Project Title</h1>
-        <p>Description</p>
-        <h6 className="timestamp">Posted at: Time Stamp</h6>
-        <h6>Posted by: User's name | Company Name</h6>
+        <span className="status">status: {props.card.status}</span>
+        <h1>{props.card.name}</h1>
+        <p>Description: {props.card.description}</p>
+        <h6 className="timestamp">
+          Posted on:{' '}
+          {moment(props.card.created_at, 'YYYY-MM-DDTkk:mm:ss.SSSZ').format(
+            'MMMM Do YYYY'
+          )}
+        </h6>
+        <h6>
+          Posted by: {props.card.first_name} {props.card.last_name} |{' '}
+          {props.card.company}
+        </h6>
       </div>
     </Link>
   )
