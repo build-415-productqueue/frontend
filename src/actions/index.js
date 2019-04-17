@@ -11,9 +11,10 @@ export const login = creds => dispatch => {
   return axios
     .post(`${URL}/api/users/login`, creds)
     .then(res => {
-      localStorage.setItem('token', res.data.token)
-      console.log(res.data)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data })
+      localStorage.setItem('token', res.data.token)
+      const saved = JSON.stringify(res.data)
+      localStorage.setItem('data', saved)
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILED, payload: err })
@@ -35,4 +36,15 @@ export const register = creds => dispatch => {
     .catch(err => {
       dispatch({ type: REGISTER_FAILED, payload: err })
     })
+}
+
+export const LOGOUT = 'LOGOUT'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+
+export const logout = () => dispatch => {
+  dispatch({ type: LOGOUT })
+  localStorage.removeItem('token')
+  localStorage.removeItem('data')
+  dispatch({ type: LOGOUT_SUCCESS })
+  window.location.reload()
 }

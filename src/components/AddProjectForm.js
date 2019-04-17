@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import '../styles/addform.css'
 
 class AddProjectForm extends Component {
@@ -8,8 +7,7 @@ class AddProjectForm extends Component {
       project_name: '',
       description: '',
       links: '',
-      files: '',
-      images: ''
+      files: ''
     }
   }
 
@@ -30,7 +28,7 @@ class AddProjectForm extends Component {
             <h2>Upload a project!</h2>
           </div>
           <>
-            <label for="project_name">Project Name</label>
+            <label htmlFor="project_name">Project Name</label>
             <input
               id="project_name"
               type="text"
@@ -42,7 +40,7 @@ class AddProjectForm extends Component {
             />
           </>
           <>
-            <label for="description">Description</label>
+            <label htmlFor="description">Description</label>
             <textarea
               id="description"
               type="text"
@@ -54,7 +52,7 @@ class AddProjectForm extends Component {
             />
           </>
           <>
-            <label for="link">links</label>
+            <label htmlFor="link">link to wireframe</label>
             <input
               id="link"
               type="text"
@@ -64,27 +62,17 @@ class AddProjectForm extends Component {
             />
           </>
           <>
-            <label for="file">File Upload</label>
+            <label htmlFor="file">Link to Technical specification "Spec"</label>
             <input
               id="file"
-              type="file"
+              type="text"
               name="file"
               multiple
               value={this.state.input.file}
               onChange={this.handleChanges}
             />
           </>
-          <>
-            <label for="image">Images</label>
-            <input
-              id="image"
-              type="file"
-              name="image"
-              multiple
-              value={this.state.input.image}
-              onChange={this.handleChanges}
-            />
-          </>
+
           <button>Submit</button>
         </form>
       </div>

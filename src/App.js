@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import RegistrationForm from './components/RegistrationForm'
 import LoginForm from './components/LoginForm'
 import PrivateRoute from './components/PrivateRoute'
@@ -12,10 +12,11 @@ import Footer from './components/Footer'
 
 class App extends Component {
   render() {
+    const RouterNav = withRouter(Nav)
     return (
       <Router>
         <div className="App">
-          <Nav />
+          <RouterNav />
           <Route exact path="/" component={RegistrationForm} />
           <Route path="/login" component={LoginForm} />
           <PrivateRoute exact path="/account" component={Account} />
@@ -23,7 +24,6 @@ class App extends Component {
           <PrivateRoute exact path="/add-project" component={AddProjectForm} />
           <PrivateRoute exact path="/project-details/:id" component={Project} />
           <Footer />
-          <Link to="/account">Test</Link>
         </div>
       </Router>
     )
