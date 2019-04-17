@@ -4,7 +4,9 @@ import {
   LOGIN_FAILED,
   REGISTER_START,
   REGISTER_SUCCESS,
-  REGISTER_FAILED
+  REGISTER_FAILED,
+  LOGOUT,
+  LOGOUT_SUCCESS
 } from '../actions'
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   error: null,
   loggingIn: false,
   fetchingProjects: false,
-  registering: false
+  registering: false,
+  isLoggedIn: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -39,20 +42,37 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: '',
-        loggingIn: true
+        loggingIn: true,
+        isLoggedIn: false
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
         error: '',
         loggingIn: false,
-        user: action.payload
+        user: action.payload,
+        isLoggedIn: true
       }
     case LOGIN_FAILED:
       return {
         ...state,
         error: action.payload,
-        loggingIn: false
+        loggingIn: false,
+        isLoggedIn: false
+      }
+    case LOGOUT:
+      return {
+        ...state,
+        loggingOut: true,
+        error: ''
+      }
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loggingOut: false,
+        error: '',
+        user: {},
+        isLoggedIn: false
       }
     default:
       return state

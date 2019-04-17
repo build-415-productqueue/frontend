@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { URL } from '../actions'
 import axios from 'axios'
 import ProjectCard from './ProjectCard'
@@ -8,18 +6,49 @@ import '../styles/projects.css'
 
 class DashBoard extends Component {
   state = {
-    projects: [1, 2, 3, 4]
+    projects: [],
+    error: ''
   }
 
   componentDidMount() {
-    axios
-      .get(`${URL}`)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    const data = JSON.parse(localStorage.getItem('data'))
+    if (data.role === 'admin') {
+      //GET to All projects
+      axios
+        .get(`${URL}/api/projects`, {
+          headers: {
+            Authorization: data.token
+          }
+        })
+        .then(res => {
+          this.setState({
+            projects: res.data
+          })
+          console.log(res.data)
+        })
+        .catch(err => {
+          this.setState({
+            error: err
+          })
+        })
+    } else {
+      axios
+        .get(`${URL}/api/projects/${data.id}`, {
+          headers: {
+            Authorization: data.token
+          }
+        })
+        .then(res => {
+          this.setState({
+            projects: res.data
+          })
+        })
+        .catch(err => {
+          this.setState({
+            error: err
+          })
+        })
+    }
   }
 
   render() {

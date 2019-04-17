@@ -1,5 +1,4 @@
 import React from 'react'
-import { URL } from '../actions'
 import { Link } from 'react-router-dom'
 import '../styles/projects.css'
 

@@ -128,7 +128,6 @@ class Account extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.user)
   return {
     user: state.user,
     token: state.user.token

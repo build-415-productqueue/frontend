@@ -13,6 +13,7 @@ nav {
     border-bottom-color: #eaeaea;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    z-index: 9999;
 }
 
 nav img {
@@ -20,7 +21,8 @@ nav img {
     height: 62px;
 }
 
-nav a {
+
+.dropdown {
     font-size: 40px;
     text-decoration: none;
     color: inherit;
