@@ -12,12 +12,13 @@ class DashBoard extends Component {
 
   componentDidMount() {
     const data = JSON.parse(localStorage.getItem('data'))
+    const token = localStorage.getItem('token')
     if (data.role === 'admin') {
       //GET to All projects
       axios
         .get(`${URL}/api/projects`, {
           headers: {
-            Authorization: data.token
+            Authorization: token
           }
         })
         .then(res => {
@@ -35,7 +36,7 @@ class DashBoard extends Component {
       axios
         .get(`${URL}/api/projects/${data.id}`, {
           headers: {
-            Authorization: data.token
+            Authorization: token
           }
         })
         .then(res => {
