@@ -12,41 +12,37 @@ class Project extends Component {
     this.state = {
       disabled: true,
       project: {}
-      // info: {},
-      // project: {
-      //   projectTitle: '',
-      //   submittedBy: '',
-      //   company: '',
-      //   description: '',
-      //   status: '',
-      //   dateSubmitted: '',
-      //   lastUpdated: '',
-      //   links: '',
-      //   comments: []
-      // }
     }
   }
 
   componentDidMount() {
-    if (this.props.location.state && this.props.location.state.card) {
-      this.setState({ project: this.props.location.state.card })
-    } else {
-      const token = localStorage.getItem('token')
-      const user = JSON.parse(localStorage.getItem('data'))
-      const projectId = this.props.match.params.id
-      axios
-        .get(`${URL}/api/projects/${user.id}/${projectId}`, {
+    this.setState({ project: this.props.location.state.card })
+    const token = localStorage.getItem('token')
+    const user = JSON.parse(localStorage.getItem('data'))
+    const projectId = this.props.match.params.id
+    axios
+      .get(
+        `${URL}/api/projects/${
+          this.props.location.state.card.user_id
+        }/${projectId}`,
+        {
           headers: {
             Authorization: token
           }
+        }
+      )
+      .then(res => {
+        this.setState({
+          project: {
+            ...this.state.project,
+            comments: res.data.comments,
+            links: res.data.links
+          }
         })
-        .then(res => {
-          console.log(res.data)
-          this.setState({
-            info: res.data
-          })
-        })
-    }
+      })
+      .catch(err => {
+        alert('something is wrong, please try again.')
+      })
   }
 
   changeHandler = e => {

@@ -30,7 +30,12 @@ class App extends Component {
           <Route path="/login" component={LoginForm} />
           <PrivateRoute exact path="/account" component={Account} />
           <PrivateRoute exact path="/dashboard" component={DashBoard} />
-          <PrivateRoute exact path="/add-project" component={AddProjectForm} />
+          <PrivateRoute
+            exact
+            path="/add-project"
+            component={AddProjectForm}
+            props={this.props}
+          />
           <PrivateRoute exact path="/project-details/:id" component={Project} />
           <Footer />
         </div>
