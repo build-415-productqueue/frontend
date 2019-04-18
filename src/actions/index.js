@@ -67,7 +67,6 @@ export const updateUser = (newUser, token) => dispatch => {
     })
     .then(res => {
       dispatch({ type: UPDATE_USER_SUCCESS, payload: res.data })
-      console.log(res.data)
       localStorage.setItem('data', JSON.stringify(res.data))
     })
     .catch(err => {
