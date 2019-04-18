@@ -53,6 +53,7 @@ class DashBoard extends Component {
   }
 
   render() {
+    console.log(this.state.projects)
     return (
       <div className="container">
         <h1>Project Dashboard</h1>

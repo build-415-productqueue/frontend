@@ -4,9 +4,8 @@ import '../styles/projects.css'
 import moment from 'moment'
 
 const ProjectCard = props => {
-  console.log(props.card)
   return (
-    <Link to={`/project-details/${props.card.id}`}>
+    <Link to={`/project-details/${props.card.project_id}`}>
       <div className="projectcard">
         <span className="timestamp">
           {' '}
