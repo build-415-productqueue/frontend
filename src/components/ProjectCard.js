@@ -5,7 +5,12 @@ import moment from 'moment'
 
 const ProjectCard = props => {
   return (
-    <Link to={`/project-details/${props.card.id}`}>
+    <Link
+      to={{
+        pathname: `/project-details/${props.card.id}`,
+        state: { card: props.card }
+      }}
+    >
       <div className="projectcard">
         <span className="timestamp">
           {' '}
