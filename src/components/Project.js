@@ -11,7 +11,12 @@ class Project extends Component {
     super(props)
     this.state = {
       disabled: true,
-      project: {}
+      project: {},
+      newLink: false,
+      linkForm: {
+        link_type: '',
+        link_href: ''
+      }
     }
   }
 
@@ -80,6 +85,44 @@ class Project extends Component {
       return false
     } else {
       return true
+    }
+  }
+
+  linkChange = e => {
+    this.setState({
+      linkForm: {
+        ...this.state.linkForm,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  addLink = async e => {
+    e.preventDefault()
+    try {
+      const res = await axios.post(
+        `${URL}/api/projects/${this.props.match.params.id}/links`,
+        this.state.linkForm,
+        {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        }
+      )
+      this.setState({
+        newLink: false,
+        disabled: true,
+        project: {
+          ...this.state.project,
+          links: res.data
+        },
+        linkForm: {
+          link_type: '',
+          link_href: ''
+        }
+      })
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -193,50 +236,56 @@ class Project extends Component {
               value={this.state.project.description}
               disabled={this.state.disabled}
             />
-
-            <h4> Project Links </h4>
-
-            <label htmlFor="links"> Links:</label>
-            <input
-              type="text"
-              id="links"
-              name="links"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.links}
-              disabled={this.state.disabled}
-            />
-
-            {this.state.project.heroku || user.role === 'admin' ? (
-              <>
-                <label htmlFor="github"> GitHub Repo:</label>
-                <input
-                  type="text"
-                  id="github"
-                  name="github"
-                  onChange={this.changeHandler}
-                  defaultValue={this.state.project.github}
-                  disabled={user.role === 'admin' ? this.state.disabled : true}
-                />
-              </>
-            ) : null}
-
-            {this.state.project.heroku || user.role === 'admin' ? (
-              <>
-                <label htmlFor="heroku"> Deployed App:</label>
-                <input
-                  type="text"
-                  id="heroku"
-                  name="heroku"
-                  onChange={this.changeHandler}
-                  defaultValue={this.state.project.heroku}
-                  disabled={user.role === 'admin' ? this.state.disabled : true}
-                />
-              </>
-            ) : null}
-
             {this.state.disabled ? null : <button type="submit">Submit</button>}
           </form>
         </fieldset>
+        <div>
+          <h4> Project Links </h4>
+          <button
+            className="add-link"
+            onClick={e => {
+              e.preventDefault()
+              this.setState({ newLink: !this.state.newLink })
+            }}
+          >
+            Add New Link
+          </button>
+          {this.state.project.links &&
+            this.state.project.links.map(link => (
+              <div key={link.id}>
+                <strong>{link.link_type}: </strong>
+                <a
+                  href={link.link_href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.link_href}
+                </a>
+              </div>
+            ))}
+          {this.state.newLink && (
+            <form onSubmit={this.addLink} className="link-form">
+              <div>
+                <select
+                  name="link_type"
+                  value={this.state.linkForm.link_type}
+                  onChange={this.linkChange}
+                >
+                  <option>Select Type</option>
+                  <option>GitHub</option>
+                  <option>Netlify</option>
+                </select>
+                <input
+                  type="text"
+                  name="link_href"
+                  value={this.state.linkForm.link_href}
+                  onChange={this.linkChange}
+                />
+              </div>
+              <button>Add Link</button>
+            </form>
+          )}
+        </div>
       </div>
     )
   }
