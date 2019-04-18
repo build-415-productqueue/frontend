@@ -110,7 +110,7 @@ class DashBoard extends Component {
             ))}
           </div>
         ) : (
-          <Loader type="Ball-Triangle" color="#a00100" height="90" width="60" />
+          <Loader type="Ball-Triangle" color="#bb1333" height="90" width="60" />
         )}
       </div>
     )

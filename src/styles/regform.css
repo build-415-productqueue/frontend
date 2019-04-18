@@ -18,7 +18,7 @@ div .regform form .regheader{
 }
 
 div .regform form .regheader p a{
-    color: #a00100;
+    color: #bb1333;
 }
 
 div .regform form .regheader p a:hover{
@@ -57,8 +57,8 @@ div .regform form button {
     padding: 10px 40px;
     margin-top: 10px;
     color: #ffffff;
-    border-color: #a00100;
-    background-color: #a00100;
+    border-color: #bb1333;
+    background-color: #bb1333;
     border: none;
     outline: none;
     text-align: center;

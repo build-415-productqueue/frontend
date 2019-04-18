@@ -27,7 +27,7 @@ div .container #search {
 }
 
 div .container #search:focus {
-    border-bottom: 2px solid #A00100;
+    border-bottom: 2px solid #bb1333;
 }
 
 div .container .projectlist {
@@ -65,7 +65,7 @@ div .container .projectlist .projectcard span {
 }
 
 div .container .projectlist .projectcard h1 { 
-    color: #a00100;
+    color: #bb1333;
     margin: 0 0 5px;
     font-size: 22px;
     font-weight: bold;

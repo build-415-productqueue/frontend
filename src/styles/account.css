@@ -16,7 +16,7 @@ div .accform fieldset {
 
 div .accform fieldset .edit{
     padding: 10px 5px;
-    background: #a00100;
+    background: #bb1333;
     color: white;
     text-align: center;
     border-radius: 2px;
@@ -61,7 +61,7 @@ div .accform form .accheader{
 }
 
 div .accform form .accheader p a{
-    color: #a00100;
+    color: #bb1333;
 }
 
 div .accform form .accheader p a:hover{
@@ -94,7 +94,7 @@ div .accform form input:disabled {
     border-color: white;
     background: white;
     padding-left: 0;
-    color: #a00100;	
+    color: #bb1333;	
     font-size: 20px;	
     font-weight: bold;
 }
@@ -109,8 +109,8 @@ div .accform form button {
     padding: 10px 40px;
     margin-top: 10px;
     color: #ffffff;
-    border-color: #a00100;
-    background-color: #a00100;
+    border-color: #bb1333;
+    background-color: #bb1333;
     border: none;
     outline: none;
     text-align: center;
@@ -132,7 +132,7 @@ div .accform form button:hover {
     margin: 10px 0;
     border-radius: 2px;
     color: #FFFFFF;
-    background-color: #a00100;
+    background-color: #bb1333;
     border:none;
     outline: none;
     cursor:pointer;

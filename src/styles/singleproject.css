@@ -16,7 +16,7 @@ div .singleproj fieldset {
 
 div .singleproj fieldset .edit{
     padding: 10px 5px;
-    background: #a00100;
+    background: #bb1333;
     color: white;
     text-align: center;
     border-radius: 2px;
@@ -32,9 +32,9 @@ div .singleproj fieldset .edit{
 div .singleproj .delete {
     padding: 10px 5px;
     background: white;
-    color: #a00100;
+    color: #bb1333;
     text-align: center;
-    border: 1px solid #a00100;
+    border: 1px solid #bb1333;
     border-radius: 2px;
     width: 75px;
     font-weight: bold;
@@ -46,8 +46,8 @@ div .singleproj .delete {
 }
 
 div .singleproj .delete:hover {
-    background: #a00100;
-    border-color: #a00100;
+    background: #bb1333;
+    border-color: #bb1333;
     color: white;
 }
 
@@ -83,7 +83,7 @@ div .singleproj form {
 }
 
 div .singleproj form h2 {
-    color: #a00100;
+    color: #bb1333;
     margin: 0 0 5px;
     font-weight: bold;
 }
@@ -111,7 +111,7 @@ div .singleproj form span:first-of-type {
 }
 
 div .singleproj form  p a{
-    color: #a00100;
+    color: #bb1333;
 }
 
 div .singleproj form  p a:hover{
@@ -166,8 +166,8 @@ div .singleproj form button {
     padding: 10px 40px;
     margin-top: 10px;
     color: #ffffff;
-    border-color: #a00100;
-    background-color: #a00100;
+    border-color: #bb1333;
+    background-color: #bb1333;
     border: none;
     outline: none;
     text-align: center;
