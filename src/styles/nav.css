@@ -27,3 +27,15 @@ nav img {
     text-decoration: none;
     color: inherit;
 }
+
+.dropdown:hover {
+    color: #a00100;
+}
+
+.dropdown a {
+    color: #a00100;
+}
+
+.dropdown a:hover {
+    color: #333;
+}
