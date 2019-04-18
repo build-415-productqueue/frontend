@@ -266,15 +266,31 @@ class Project extends Component {
           {this.state.newLink && (
             <form onSubmit={this.addLink} className="link-form">
               <div>
-                <select
-                  name="link_type"
-                  value={this.state.linkForm.link_type}
-                  onChange={this.linkChange}
-                >
-                  <option>Select Type</option>
-                  <option>GitHub</option>
-                  <option>Netlify</option>
-                </select>
+                {user.role === 'admin' ? (
+                  <select
+                    name="link_type"
+                    value={this.state.linkForm.link_type}
+                    onChange={this.linkChange}
+                  >
+                    <option>Select Type</option>
+                    <option>GitHub</option>
+                    <option>Netlify</option>
+                  </select>
+                ) : (
+                  <select
+                    name="link_type"
+                    value={this.state.linkForm.link_type}
+                    onChange={this.linkChange}
+                  >
+                    <option>Select Type</option>
+                    <option>Figma</option>
+                    <option>Sketch</option>
+                    <option>Dropbox</option>
+                    <option>Box</option>
+                    <option>Google Drive</option>
+                    <option>Office 365</option>
+                  </select>
+                )}
                 <input
                   type="text"
                   name="link_href"
