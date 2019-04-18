@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
-import '../styles/account.css'
-import { URL } from '../actions'
+import '../styles/singleproject.css'
+import { URL, deleteProject } from '../actions'
 import moment from 'moment'
 
 class Project extends Component {
@@ -56,6 +56,12 @@ class Project extends Component {
         ...this.state.project,
         [e.target.name]: e.target.value
       }
+    })
+  }
+
+  deleteProject = (userId, projectId, token) => {
+    this.props.deleteProject(userId, projectId, token).then(() => {
+      this.props.history.push('/dashboard')
     })
   }
 
@@ -121,9 +127,11 @@ class Project extends Component {
   }
 
   render() {
+    console.log(this.state.project)
     const user = JSON.parse(localStorage.getItem('data'))
+    const token = localStorage.getItem('token')
     return (
-      <div className="accform">
+      <div className="singleproj">
         <fieldset disabled={this.state.disabled}>
           <form>
             <p
@@ -132,7 +140,43 @@ class Project extends Component {
             >
               {this.state.disabled ? 'EDIT' : 'CANCEL'}
             </p>
-
+            {user.role === 'admin' ? (
+              <p
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this project?'
+                    )
+                  )
+                    this.deleteProject(
+                      this.state.project.user_id,
+                      this.state.project.id,
+                      token
+                    )
+                }}
+                className="dBtn"
+              >
+                DELETE
+              </p>
+            ) : (
+              <p
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this project?'
+                    )
+                  )
+                    this.deleteProject(
+                      this.state.project.user_id,
+                      this.state.project.project_id,
+                      token
+                    )
+                }}
+                className="dBtn"
+              >
+                DELETE
+              </p>
+            )}
             <h2>{this.state.project.name}</h2>
 
             <h6 htmlFor="submittedBy">
@@ -162,13 +206,24 @@ class Project extends Component {
               disabled={this.state.disabled}
               value={this.state.project.status}
               onChange={this.changeHandler}
+              className={`status ${this.state.project.status}`}
             >
-              <option defaultValue>Select Type</option>
-              <option>Pending</option>
-              {user.role === 'admin' ? <option>Approved</option> : null}
-              {user.role === 'admin' ? <option>Denied</option> : null}
-              {user.role === 'admin' ? <option>Working</option> : null}
-              {user.role === 'user' ? <option>Complete</option> : null}
+              <option defaultValue>Pending</option>
+              {user.role === 'admin' ? (
+                <option className="Approved">Approved</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Denied">Denied</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Working">Working</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Feedback">Feedback</option>
+              ) : null}
+              {user.role === 'user' ? (
+                <option className="Complete">Complete</option>
+              ) : null}
             </select>
 
             <label htmlFor="description"> Description:</label>
@@ -238,5 +293,5 @@ class Project extends Component {
 
 export default connect(
   null,
-  {}
+  { deleteProject }
 )(Project)

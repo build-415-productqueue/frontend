@@ -6,7 +6,7 @@ footer {
     align-items: center;
     padding: 40px 0;
     z-index: 99;
-
+    width: 100%;
 }
 
 footer p {
