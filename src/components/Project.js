@@ -154,7 +154,7 @@ class Project extends Component {
                       token
                     )
                 }}
-                className="dBtn"
+                className="delete"
               >
                 DELETE
               </p>
@@ -172,7 +172,7 @@ class Project extends Component {
                       token
                     )
                 }}
-                className="dBtn"
+                className="delete"
               >
                 DELETE
               </p>
