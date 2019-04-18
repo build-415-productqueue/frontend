@@ -54,12 +54,13 @@ class DashBoard extends Component {
 
   render() {
     console.log(this.state.projects)
+    const data = JSON.parse(localStorage.getItem('data'))
     return (
       <div className="container">
         <h1>Project Dashboard</h1>
         <div className="projectlist">
           {this.state.projects.map((project, i) => (
-            <ProjectCard key={i} card={project} />
+            <ProjectCard key={i} card={project} user={data} />
           ))}
         </div>
       </div>

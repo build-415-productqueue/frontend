@@ -7,7 +7,9 @@ const ProjectCard = props => {
   return (
     <Link
       to={{
-        pathname: `/project-details/${props.card.id}`,
+        pathname: `/project-details/${
+          props.user.role === 'admin' ? props.card.id : props.card.project_id
+        }`,
         state: { card: props.card }
       }}
     >
