@@ -9,7 +9,9 @@ class DashBoard extends Component {
   state = {
     projects: [],
     error: '',
-    fetching: false
+    fetching: false,
+    sortTerm: '',
+    searchTerm: ''
   }
 
   componentDidMount() {
@@ -67,14 +69,44 @@ class DashBoard extends Component {
     }
   }
 
+  updateSearch = e => {
+    this.setState({ [e.target.name]: e.target.value.substr(0, 20) })
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('data'))
+    let searchedProjects = this.state.projects.filter(project => {
+      if (
+        project.name
+          .toLowerCase()
+          .indexOf(this.state.searchTerm.toLowerCase()) > -1
+      ) {
+        return project
+      } else if (
+        project.status
+          .toLowerCase()
+          .indexOf(this.state.searchTerm.toLowerCase()) > -1
+      ) {
+        return project
+      } else {
+        return null
+      }
+    })
     return (
       <div className="container">
         <h1>Project Dashboard</h1>
+        <input
+          id="search"
+          type="text"
+          name="searchTerm"
+          placeholder="Search projects..."
+          onChange={this.updateSearch}
+          value={this.state.searchTerm}
+        />
+
         {!this.state.fetching ? (
           <div className="projectlist">
-            {this.state.projects.map((project, i) => (
+            {searchedProjects.map((project, i) => (
               <ProjectCard key={i} card={project} user={data} />
             ))}
           </div>
