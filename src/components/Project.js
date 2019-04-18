@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
 import '../styles/singleproject.css'
-import { URL } from '../actions'
+import { URL, deleteProject } from '../actions'
 import moment from 'moment'
 
 class Project extends Component {
@@ -54,6 +54,12 @@ class Project extends Component {
     })
   }
 
+  deleteProject = (userId, projectId, token) => {
+    this.props.deleteProject(userId, projectId, token).then(() => {
+      this.props.history.push('/dashboard')
+    })
+  }
+
   editHandler = () => {
     if (!this.state.disabled) {
       this.setState({
@@ -78,7 +84,9 @@ class Project extends Component {
   }
 
   render() {
+    console.log(this.state.project)
     const user = JSON.parse(localStorage.getItem('data'))
+    const token = localStorage.getItem('token')
     return (
       <div className="singleproj">
         <fieldset disabled={this.state.disabled}>
@@ -89,7 +97,43 @@ class Project extends Component {
             >
               {this.state.disabled ? 'EDIT' : 'CANCEL'}
             </p>
-
+            {user.role === 'admin' ? (
+              <p
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this project?'
+                    )
+                  )
+                    this.deleteProject(
+                      this.state.project.user_id,
+                      this.state.project.id,
+                      token
+                    )
+                }}
+                className="dBtn"
+              >
+                DELETE
+              </p>
+            ) : (
+              <p
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      'Are you sure you wish to delete this project?'
+                    )
+                  )
+                    this.deleteProject(
+                      this.state.project.user_id,
+                      this.state.project.project_id,
+                      token
+                    )
+                }}
+                className="dBtn"
+              >
+                DELETE
+              </p>
+            )}
             <h2>{this.state.project.name}</h2>
 
             <h6 htmlFor="submittedBy">
@@ -200,5 +244,5 @@ class Project extends Component {
 
 export default connect(
   null,
-  {}
+  { deleteProject }
 )(Project)

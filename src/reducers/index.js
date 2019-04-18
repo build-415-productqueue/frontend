@@ -13,7 +13,11 @@ import {
   UPDATE_USER_FAILED,
   ADD_PROJECT_START,
   ADD_PROJECT_SUCCESS,
-  ADD_PROJECT_FAILED
+  ADD_PROJECT_FAILED,
+  FETCHING_DATA_SUCCESS,
+  DELETE_PROJECT_START,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAILED
 } from '../actions'
 
 const initialState = {
@@ -87,7 +91,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
-        error: ''
+        error: '',
+        fetchingProjects: true
+      }
+    case FETCHING_DATA_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        fetchingProjects: false
       }
     case UPDATE_USER_START:
       return {
@@ -120,6 +131,21 @@ const reducer = (state = initialState, action) => {
         projectsAdded: action.payload
       }
     case ADD_PROJECT_FAILED:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case DELETE_PROJECT_START:
+      return {
+        ...state,
+        error: ''
+      }
+    case DELETE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      }
+    case DELETE_PROJECT_FAILED:
       return {
         ...state,
         error: action.payload

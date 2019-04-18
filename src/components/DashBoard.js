@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { URL } from '../actions'
 import axios from 'axios'
 import ProjectCard from './ProjectCard'
+import Loader from 'react-loader-spinner'
 import '../styles/projects.css'
 
 class DashBoard extends Component {
   state = {
     projects: [],
-    error: ''
+    error: '',
+    fetching: false
   }
 
   componentDidMount() {
@@ -16,16 +18,22 @@ class DashBoard extends Component {
     if (data.role === 'admin') {
       //GET to All projects
       axios
-        .get(`${URL}/api/projects`, {
-          headers: {
-            Authorization: token
-          }
-        })
+        .get(
+          `${URL}/api/projects`,
+          {
+            headers: {
+              Authorization: token
+            }
+          },
+          this.setState({
+            fetching: true
+          })
+        )
         .then(res => {
           this.setState({
-            projects: res.data
+            projects: res.data,
+            fetching: false
           })
-          console.log(res.data)
         })
         .catch(err => {
           this.setState({
@@ -34,14 +42,21 @@ class DashBoard extends Component {
         })
     } else {
       axios
-        .get(`${URL}/api/projects/${data.id}`, {
-          headers: {
-            Authorization: token
-          }
-        })
+        .get(
+          `${URL}/api/projects/${data.id}`,
+          {
+            headers: {
+              Authorization: token
+            }
+          },
+          this.setState({
+            fetching: true
+          })
+        )
         .then(res => {
           this.setState({
-            projects: res.data
+            projects: res.data,
+            fetching: false
           })
         })
         .catch(err => {
@@ -57,11 +72,15 @@ class DashBoard extends Component {
     return (
       <div className="container">
         <h1>Project Dashboard</h1>
-        <div className="projectlist">
-          {this.state.projects.map((project, i) => (
-            <ProjectCard key={i} card={project} user={data} />
-          ))}
-        </div>
+        {!this.state.fetching ? (
+          <div className="projectlist">
+            {this.state.projects.map((project, i) => (
+              <ProjectCard key={i} card={project} user={data} />
+            ))}
+          </div>
+        ) : (
+          <Loader type="Ball-Triangle" color="#a00100" height="90" width="60" />
+        )}
       </div>
     )
   }
