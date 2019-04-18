@@ -10,8 +10,13 @@ class Project extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      newLink: false,
       disabled: true,
-      project: {}
+      project: {},
+      linkForm: {
+        link_type: '',
+        link_href: ''
+      }
     }
   }
 
@@ -77,6 +82,44 @@ class Project extends Component {
     }
   }
 
+  linkChange = e => {
+    this.setState({
+      linkForm: {
+        ...this.state.linkForm,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+  addLink = async e => {
+    e.preventDefault()
+    try {
+      const res = await axios.post(
+        `${URL}/api/projects/${this.props.match.params.id}/links`,
+        this.state.linkForm,
+        {
+          headers: {
+            Authorization: localStorage.getItem('token')
+          }
+        }
+      )
+      this.setState({
+        newLink: false,
+        disabled: true,
+        project: {
+          ...this.state.project,
+          links: res.data
+        },
+        linkForm: {
+          link_type: '',
+          link_href: ''
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   render() {
     const user = JSON.parse(localStorage.getItem('data'))
     return (
@@ -138,41 +181,56 @@ class Project extends Component {
               value={this.state.project.description}
               disabled={this.state.disabled}
             />
-
-            <h4> Project Links </h4>
-
-            <label htmlFor="links"> Links:</label>
-            <input
-              type="text"
-              id="links"
-              name="links"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.links}
-              disabled={this.state.disabled}
-            />
-
-            <label htmlFor="github"> GitHub Repo:</label>
-            <input
-              type="text"
-              id="github"
-              name="github"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.github}
-              disabled={this.state.disabled}
-            />
-
-            <label htmlFor="heroku"> Deployed App:</label>
-            <input
-              type="text"
-              id="heroku"
-              name="heroku"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.heroku}
-              disabled={this.state.disabled}
-            />
             {this.state.disabled ? null : <button type="submit">Submit</button>}
           </form>
         </fieldset>
+        <div>
+          <h4> Project Links </h4>
+          <button
+            className="add-link"
+            onClick={e => {
+              e.preventDefault()
+              this.setState({ newLink: !this.state.newLink })
+            }}
+          >
+            Add New Link
+          </button>
+          {this.state.project.links &&
+            this.state.project.links.map(link => (
+              <div key={link.id}>
+                <strong>{link.link_type}: </strong>
+                <a
+                  href={link.link_href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.link_href}
+                </a>
+              </div>
+            ))}
+          {this.state.newLink && (
+            <form onSubmit={this.addLink} className="link-form">
+              <div>
+                <select
+                  name="link_type"
+                  value={this.state.linkForm.link_type}
+                  onChange={this.linkChange}
+                >
+                  <option>Select Type</option>
+                  <option>GitHub</option>
+                  <option>Netlify</option>
+                </select>
+                <input
+                  type="text"
+                  name="link_href"
+                  value={this.state.linkForm.link_href}
+                  onChange={this.linkChange}
+                />
+              </div>
+              <button>Add Link</button>
+            </form>
+          )}
+        </div>
       </div>
     )
   }
