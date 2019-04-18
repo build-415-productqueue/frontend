@@ -6,22 +6,13 @@ import '../styles/addform.css'
 
 class AddProjectForm extends Component {
   state = {
-    linkCount: 2,
+    linkCount: 0,
     token: '',
     userId: '',
     input: {
       project_name: '',
       description: '',
-      links: {
-        link1: {
-          link_type: '',
-          link_href: ''
-        },
-        link2: {
-          link_type: '',
-          link_href: ''
-        }
-      },
+      links: {},
       files: ''
     }
   }
@@ -139,6 +130,7 @@ class AddProjectForm extends Component {
                   <option>Office 365</option>
                 </select>
                 <input
+                  required
                   id={link}
                   type="text"
                   value={this.state.input.links[link].link_href}
