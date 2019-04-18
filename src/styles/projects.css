@@ -51,6 +51,9 @@ div .container .projectlist .projectcard h1 {
 
 div .container .projectlist .projectcard h6 { 
     margin: 0;
+    font-weight: normal;
+    font-size: .9rem;
+    color: #666;
 }
 
 div .container .projectlist .projectcard p { 
@@ -58,4 +61,31 @@ div .container .projectlist .projectcard p {
     white-space: wrap; 
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+div .container .projectlist .projectcard .status {
+    font-size: .8rem;
+    color: black;
+}
+
+
+div .container .projectlist .projectcard .status span { 
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+}
+
+.Pending { 
+    color: #333;
+}
+
+.Denied { 
+    color: crimson;
+}
+
+.Approved, .Complete { 
+    color: #2D936C;
+}
+
+.Working { 
+    color: #535fd7;
 }

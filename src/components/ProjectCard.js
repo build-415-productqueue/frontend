@@ -8,18 +8,20 @@ const ProjectCard = props => {
   return (
     <Link to={`/project-details/${props.card.id}`}>
       <div className="projectcard">
-        <span className="status">status: {props.card.status}</span>
-        <h1>{props.card.name}</h1>
-        <p>Description: {props.card.description}</p>
-        <h6 className="timestamp">
-          Posted on:{' '}
+        <span className="timestamp">
+          {' '}
           {moment(props.card.created_at, 'YYYY-MM-DDTkk:mm:ss.SSSZ').format(
-            'MMMM Do YYYY'
+            'MMMM Do, YYYY'
           )}
-        </h6>
+        </span>
+        <h1>{props.card.name}</h1>
         <h6>
-          Posted by: {props.card.first_name} {props.card.last_name} |{' '}
-          {props.card.company}
+          {props.card.first_name} {props.card.last_name}, {props.card.company}
+        </h6>
+        <p>{props.card.description}</p>
+        <h6 className="status">
+          Status:{' '}
+          <span className={props.card.status}> {props.card.status}</span>
         </h6>
       </div>
     </Link>
