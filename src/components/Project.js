@@ -231,9 +231,7 @@ class Project extends Component {
               {user.role === 'admin' ? (
                 <option className="Feedback">Feedback</option>
               ) : null}
-              {user.role === 'user' ? (
-                <option className="Complete">Complete</option>
-              ) : null}
+              <option className="Complete">Complete</option>
             </select>
 
             <label htmlFor="description"> Description:</label>
