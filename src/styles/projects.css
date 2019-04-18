@@ -47,6 +47,7 @@ div .container .projectlist .projectcard h1 {
     color: #a00100;
     margin: 0 0 5px;
     font-size: 22px;
+    font-weight: bold;
 }
 
 div .container .projectlist .projectcard h6 { 
