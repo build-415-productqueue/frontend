@@ -90,7 +90,7 @@ class AddProjectForm extends Component {
       <div className="addform">
         <form onSubmit={this.submitAdd}>
           <div className="addheader">
-            <h2>Upload a project!</h2>
+            <h2>Submit Your Project</h2>
           </div>
           <>
             <label htmlFor="project_name">Project Name</label>
@@ -98,26 +98,28 @@ class AddProjectForm extends Component {
               id="project_name"
               type="text"
               name="project_name"
-              placeholder="Project Name"
+              placeholder="What's your project concept called?"
               value={this.state.input.project_name}
               onChange={this.handleChanges}
               required
             />
           </>
           <>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description">Project Description</label>
             <textarea
               id="description"
               type="text"
               name="description"
-              placeholder="Project Description"
+              placeholder="What will your project entail?"
               value={this.state.input.description}
               onChange={this.handleChanges}
               required
             />
           </>
           <>
-            <button onClick={this.addLink}>Add Link</button>
+            <button className="addlink" onClick={this.addLink}>
+              Add Link
+            </button>
             {Object.keys(this.state.input.links).map(link => (
               <div key={link}>
                 <select
