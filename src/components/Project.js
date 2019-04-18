@@ -192,7 +192,7 @@ class Project extends Component {
               {this.state.project.company}{' '}
             </h6>
 
-            <span>{this.state.project.email}</span>
+            <span>Email: {this.state.project.email}</span>
 
             <span>
               {' '}
