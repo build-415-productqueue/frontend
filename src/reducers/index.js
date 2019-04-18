@@ -17,7 +17,10 @@ import {
   FETCHING_DATA_SUCCESS,
   DELETE_PROJECT_START,
   DELETE_PROJECT_SUCCESS,
-  DELETE_PROJECT_FAILED
+  DELETE_PROJECT_FAILED,
+  UPDATE_PROJECT_START,
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_FAILED
 } from '../actions'
 
 const initialState = {
@@ -146,6 +149,21 @@ const reducer = (state = initialState, action) => {
         error: ''
       }
     case DELETE_PROJECT_FAILED:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case UPDATE_PROJECT_START:
+      return {
+        ...state,
+        error: ''
+      }
+    case UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        error: ''
+      }
+    case UPDATE_PROJECT_FAILED:
       return {
         ...state,
         error: action.payload

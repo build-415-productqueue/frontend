@@ -116,3 +116,23 @@ export const deleteProject = (userId, projectId, token) => dispatch => {
       alert('Failed to delete project, please try again')
     })
 }
+
+export const UPDATE_PROJECT_START = 'UPDATE_PROJECT_START'
+export const UPDATE_PROJECT_SUCCESS = 'UPDATE_PROJECT_SUCCESS'
+export const UPDATE_PROJECT_FAILED = 'UPDATE_PROJECT_FAILED'
+
+export const updateProject = (userId, project, token) => dispatch => {
+  const user = localStorage.getItem('data')
+  dispatch({ type: UPDATE_PROJECT_START })
+  return axios
+    .put(`${URL}/api/projects/${userId}/${project.id}`, project, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: UPDATE_PROJECT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_PROJECT_FAILED, payload: err.response })
+      alert('Something is wrong, please try again')
+    })
+}

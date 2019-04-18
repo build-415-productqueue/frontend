@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
 import '../styles/singleproject.css'
-import { URL, deleteProject } from '../actions'
+import { URL, deleteProject, updateProject } from '../actions'
 import moment from 'moment'
 
 class Project extends Component {
@@ -66,15 +66,9 @@ class Project extends Component {
   }
 
   editHandler = () => {
-    if (!this.state.disabled) {
-      this.setState({
-        disabled: true
-      })
-    } else {
-      this.setState({
-        disabled: false
-      })
-    }
+    this.setState({
+      disabled: !this.state.disabled
+    })
   }
 
   updateCheck = () => {
@@ -86,6 +80,21 @@ class Project extends Component {
     } else {
       return true
     }
+  }
+
+  updateProject = e => {
+    const token = localStorage.getItem('token')
+    const newProject = {
+      name: this.state.project.name,
+      description: this.state.project.description,
+      status: this.state.project.status,
+      id: this.state.project.id || this.state.project.project_id
+    }
+    e.preventDefault()
+    this.props.updateProject(this.state.project.user_id, newProject, token)
+    this.setState({
+      disabled: true
+    })
   }
 
   linkChange = e => {
@@ -127,13 +136,12 @@ class Project extends Component {
   }
 
   render() {
-    console.log(this.state.project)
     const user = JSON.parse(localStorage.getItem('data'))
     const token = localStorage.getItem('token')
     return (
       <div className="singleproj">
         <fieldset disabled={this.state.disabled}>
-          <form>
+          <form onSubmit={this.updateProject}>
             <p
               className={`${this.state.disabled ? 'edit' : 'cancel'}`}
               onClick={() => this.editHandler()}
@@ -243,15 +251,17 @@ class Project extends Component {
         </fieldset>
         <div>
           <h4> Project Links </h4>
-          <button
-            className="add-link"
-            onClick={e => {
-              e.preventDefault()
-              this.setState({ newLink: !this.state.newLink })
-            }}
-          >
-            Add New Link
-          </button>
+          {!this.state.disabled ? (
+            <button
+              className="add-link"
+              onClick={e => {
+                e.preventDefault()
+                this.setState({ newLink: !this.state.newLink })
+              }}
+            >
+              {!this.state.newLink ? 'Add New Link' : 'Cancel'}
+            </button>
+          ) : null}
           {this.state.project.links &&
             this.state.project.links.map(link => (
               <div key={link.id}>
@@ -293,13 +303,15 @@ class Project extends Component {
                     <option>Office 365</option>
                   </select>
                 )}
-                <input
-                  required
-                  type="text"
-                  name="link_href"
-                  value={this.state.linkForm.link_href}
-                  onChange={this.linkChange}
-                />
+                {!this.state.disabled ? (
+                  <input
+                    required
+                    type="text"
+                    name="link_href"
+                    value={this.state.linkForm.link_href}
+                    onChange={this.linkChange}
+                  />
+                ) : null}
               </div>
               <button>Add Link</button>
             </form>
@@ -312,5 +324,5 @@ class Project extends Component {
 
 export default connect(
   null,
-  { deleteProject }
+  { deleteProject, updateProject }
 )(Project)
