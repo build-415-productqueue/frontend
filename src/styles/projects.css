@@ -38,7 +38,8 @@ div .container .projectlist .projectcard {
 }
 
 div .container .projectlist .projectcard:hover {
-    box-shadow: 0 0px 3px 0 rgba(160, 1, 0, 0.2);
+    box-shadow: 0 0px 3px 0 rgba(160, 1, 0, 0.9);
+    transition: all .4s;
 }
 
 div .container .projectlist .projectcard span { 
