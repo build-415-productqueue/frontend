@@ -292,6 +292,7 @@ class Project extends Component {
                   </select>
                 )}
                 <input
+                  required
                   type="text"
                   name="link_href"
                   value={this.state.linkForm.link_href}
