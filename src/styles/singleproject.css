@@ -29,24 +29,25 @@ div .singleproj fieldset .edit{
     cursor: pointer;
 }
 
-.dBtn {
+div .singleproj .delete {
     padding: 10px 5px;
-    background: #a00100;
-    color: white;
+    background: white;
+    color: #a00100;
     text-align: center;
+    border: 1px solid #a00100;
     border-radius: 2px;
     width: 75px;
     font-weight: bold;
     font-size: 14px;
     position: absolute;
-    top: 100px;
+    top: 125px;
     right: 75px;
     cursor: pointer;
 }
 
-.dBtn:hover {
-    background: #333;
-    border-color: #333;
+div .singleproj .delete:hover {
+    background: #a00100;
+    border-color: #a00100;
     color: white;
 }
 
@@ -87,7 +88,7 @@ div .singleproj form h2 {
     font-weight: bold;
 }
 
-div .singleproj form h4 {
+div .singleproj h4 {
     border-top: 1px solid #dfdfdf;
     padding-top: 25px;
     margin-bottom: 25px;
@@ -101,6 +102,12 @@ div .singleproj form span {
     margin-bottom: 25px;
     font-weight: normal;
     font-size: 14px;
+    color: #333;
+}
+
+div .singleproj form span:first-of-type {
+    margin: 0 0 5px;
+    color: #333;
 }
 
 div .singleproj form  p a{
@@ -192,4 +199,27 @@ div .singleproj form button:hover {
 
 .Feedback {
     color: #eb4710;
+}
+
+div .singleproj .link-form .newlink {
+    margin: 20px 0;
+}
+
+div .singleproj .link-form select {
+    font-family: inherit;
+    padding: 5px 4px;
+    letter-spacing: normal;
+    color: black;
+    height: auto;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-radius: 2px;
+    background: #fafafa;
+    box-shadow: none;
+    transition: all .2s linear;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    height: 35px;
+    outline: none;
 }

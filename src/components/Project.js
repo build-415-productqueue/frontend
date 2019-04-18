@@ -162,7 +162,7 @@ class Project extends Component {
                       token
                     )
                 }}
-                className="dBtn"
+                className="delete"
               >
                 DELETE
               </p>
@@ -180,7 +180,7 @@ class Project extends Component {
                       token
                     )
                 }}
-                className="dBtn"
+                className="delete"
               >
                 DELETE
               </p>
@@ -191,6 +191,8 @@ class Project extends Component {
               {this.state.project.first_name} {this.state.project.last_name},{' '}
               {this.state.project.company}{' '}
             </h6>
+
+            <span>{this.state.project.email}</span>
 
             <span>
               {' '}
@@ -275,7 +277,7 @@ class Project extends Component {
             ))}
           {this.state.newLink && (
             <form onSubmit={this.addLink} className="link-form">
-              <div>
+              <div className="newlink">
                 {user.role === 'admin' ? (
                   <select
                     name="link_type"
