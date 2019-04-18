@@ -130,6 +130,7 @@ class AddProjectForm extends Component {
                   <option>Office 365</option>
                 </select>
                 <input
+                  required
                   id={link}
                   type="text"
                   value={this.state.input.links[link].link_href}
