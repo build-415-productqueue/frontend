@@ -63,8 +63,8 @@ div .container .projectlist .projectcard h6 {
 }
 
 div .container .projectlist .projectcard p { 
-    margin: 25px 0 25px;
-    white-space: wrap; 
+    margin: 25px 0;
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -94,4 +94,8 @@ div .container .projectlist .projectcard .status span {
 
 .Working { 
     color: #535fd7;
+}
+
+.Feedback {
+    color: #eb4710;
 }
