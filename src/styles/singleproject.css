@@ -87,7 +87,7 @@ div .singleproj form h2 {
     font-weight: bold;
 }
 
-div .singleproj form h4 {
+div .singleproj h4 {
     border-top: 1px solid #dfdfdf;
     padding-top: 25px;
     margin-bottom: 25px;
@@ -101,6 +101,12 @@ div .singleproj form span {
     margin-bottom: 25px;
     font-weight: normal;
     font-size: 14px;
+    color: #333;
+}
+
+div .singleproj form span:first-of-type {
+    margin: 0 0 5px;
+    color: #333;
 }
 
 div .singleproj form  p a{
@@ -192,4 +198,27 @@ div .singleproj form button:hover {
 
 .Feedback {
     color: #eb4710;
+}
+
+div .singleproj .link-form .newlink {
+    margin: 20px 0;
+}
+
+div .singleproj .link-form select {
+    font-family: inherit;
+    padding: 5px 4px;
+    letter-spacing: normal;
+    color: black;
+    height: auto;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eaeaea;
+    border-radius: 2px;
+    background: #fafafa;
+    box-shadow: none;
+    transition: all .2s linear;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    height: 35px;
+    outline: none;
 }

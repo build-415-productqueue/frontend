@@ -26,3 +26,7 @@ h1, h2, h3, h4, h5, h6 {
 span, p, label, input, textarea  {
   font-family: 'Nunito', sans-serif;
 }
+
+button {
+  outline: 0 !important;
+}

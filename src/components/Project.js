@@ -184,6 +184,8 @@ class Project extends Component {
               {this.state.project.company}{' '}
             </h6>
 
+            <span>{this.state.project.email}</span>
+
             <span>
               {' '}
               Created:{' '}
@@ -265,7 +267,7 @@ class Project extends Component {
             ))}
           {this.state.newLink && (
             <form onSubmit={this.addLink} className="link-form">
-              <div>
+              <div className="newlink">
                 <select
                   name="link_type"
                   value={this.state.linkForm.link_type}
