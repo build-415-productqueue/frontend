@@ -13,6 +13,23 @@ justify-self: start;
 margin-bottom: 50px;
 }
 
+div .container #search {
+    font-size: 18px;
+    color: #333;
+    padding: 2.5px 5px;
+    margin: 0 0 25px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #999;
+    transition: all .2s;
+    outline: none;
+    width: 33%;
+}
+
+div .container #search:focus {
+    border-bottom: 2px solid #A00100;
+}
+
 div .container .projectlist {
     display: flex;
     flex-flow: row wrap;

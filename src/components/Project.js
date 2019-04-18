@@ -46,7 +46,7 @@ class Project extends Component {
         })
       })
       .catch(err => {
-        alert('something is wrong, please try again.')
+        alert('Something is wrong, please try again.')
       })
   }
 
@@ -200,12 +200,12 @@ class Project extends Component {
               {moment(
                 this.state.project.created_at,
                 'YYYY-MM-DDTkk:mm:ss.SSSZ'
-              ).format('MMMM Do, YYYY')}
+              ).format('M/D/YY hh:mm A')}
               {this.updateCheck()
-                ? ` | ${moment(
+                ? ` | Updated: ${moment(
                     this.state.project.updated_at,
                     'YYYY-MM-DDTkk:mm:ss.SSSZ'
-                  ).format('MMMM Do, YYYY')}`
+                  ).format('M/D/YY hh:mm A')}`
                 : null}
             </span>
 

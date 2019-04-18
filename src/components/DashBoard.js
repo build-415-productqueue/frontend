@@ -10,7 +10,6 @@ class DashBoard extends Component {
     projects: [],
     error: '',
     fetching: false,
-    sortTerm: '',
     searchTerm: ''
   }
 
@@ -99,7 +98,7 @@ class DashBoard extends Component {
           id="search"
           type="text"
           name="searchTerm"
-          placeholder="Search projects..."
+          placeholder="Search projects by name or status..."
           onChange={this.updateSearch}
           value={this.state.searchTerm}
         />
