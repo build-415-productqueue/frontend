@@ -69,7 +69,7 @@ div .accform form .accheader p a:hover{
 }
 
 div .accform form label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 div .accform form input {
@@ -84,16 +84,19 @@ div .accform form input {
     border-radius: 2px;
     background: #fafafa;
     box-shadow: none;
-    transition: all .2s linear;
+    transition: all .2s ease-in;
     margin-bottom: 35px;
     height: 35px;
     width: 50%;
 }
 
-div .accform form input:disabled, textarea:disabled {
+div .accform form input:disabled {
     border-color: white;
     background: white;
     padding-left: 0;
+    color: #a00100;	
+    font-size: 20px;	
+    font-weight: bold;
 }
 
 div .accform form input:focus {

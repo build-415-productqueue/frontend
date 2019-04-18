@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import axios from 'axios'
-import '../styles/account.css'
+import '../styles/singleproject.css'
 import { URL } from '../actions'
 import moment from 'moment'
 
@@ -80,7 +80,7 @@ class Project extends Component {
   render() {
     const user = JSON.parse(localStorage.getItem('data'))
     return (
-      <div className="accform">
+      <div className="singleproj">
         <fieldset disabled={this.state.disabled}>
           <form>
             <p
@@ -119,13 +119,24 @@ class Project extends Component {
               disabled={this.state.disabled}
               value={this.state.project.status}
               onChange={this.changeHandler}
+              className={`status ${this.state.project.status}`}
             >
-              <option defaultValue>Select Type</option>
-              <option>Pending</option>
-              {user.role === 'admin' ? <option>Approved</option> : null}
-              {user.role === 'admin' ? <option>Denied</option> : null}
-              {user.role === 'admin' ? <option>Working</option> : null}
-              {user.role === 'user' ? <option>Complete</option> : null}
+              <option defaultValue>Pending</option>
+              {user.role === 'admin' ? (
+                <option className="Approved">Approved</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Denied">Denied</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Working">Working</option>
+              ) : null}
+              {user.role === 'admin' ? (
+                <option className="Feedback">Feedback</option>
+              ) : null}
+              {user.role === 'user' ? (
+                <option className="Complete">Complete</option>
+              ) : null}
             </select>
 
             <label htmlFor="description"> Description:</label>
@@ -151,25 +162,34 @@ class Project extends Component {
               disabled={this.state.disabled}
             />
 
-            <label htmlFor="github"> GitHub Repo:</label>
-            <input
-              type="text"
-              id="github"
-              name="github"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.github}
-              disabled={this.state.disabled}
-            />
+            {this.state.project.heroku || user.role === 'admin' ? (
+              <>
+                <label htmlFor="github"> GitHub Repo:</label>
+                <input
+                  type="text"
+                  id="github"
+                  name="github"
+                  onChange={this.changeHandler}
+                  defaultValue={this.state.project.github}
+                  disabled={user.role === 'admin' ? this.state.disabled : true}
+                />
+              </>
+            ) : null}
 
-            <label htmlFor="heroku"> Deployed App:</label>
-            <input
-              type="text"
-              id="heroku"
-              name="heroku"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.heroku}
-              disabled={this.state.disabled}
-            />
+            {this.state.project.heroku || user.role === 'admin' ? (
+              <>
+                <label htmlFor="heroku"> Deployed App:</label>
+                <input
+                  type="text"
+                  id="heroku"
+                  name="heroku"
+                  onChange={this.changeHandler}
+                  defaultValue={this.state.project.heroku}
+                  disabled={user.role === 'admin' ? this.state.disabled : true}
+                />
+              </>
+            ) : null}
+
             {this.state.disabled ? null : <button type="submit">Submit</button>}
           </form>
         </fieldset>

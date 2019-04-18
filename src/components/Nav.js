@@ -54,7 +54,7 @@ class Nav extends React.Component {
                 <NavLink to="/account">Account Settings</NavLink>
               </DropdownItem>
               <DropdownItem>
-                <p onClick={this.onLogout}>Logout</p>
+                <p onClick={this.onLogout}>Log Out</p>
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
