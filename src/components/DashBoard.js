@@ -53,7 +53,6 @@ class DashBoard extends Component {
   }
 
   render() {
-    console.log(this.state.projects)
     const data = JSON.parse(localStorage.getItem('data'))
     return (
       <div className="container">

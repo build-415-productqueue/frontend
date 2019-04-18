@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { addProject } from '../actions'
 import { connect } from 'react-redux'
+
 import '../styles/addform.css'
 
 class AddProjectForm extends Component {
@@ -74,6 +75,7 @@ class AddProjectForm extends Component {
       links: Object.values(this.state.input.links)
     }
     this.props.addProject(project, this.state.userId, this.state.token)
+    this.props.history.push('/dashboard')
   }
 
   handleChanges = e => {

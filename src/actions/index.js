@@ -18,6 +18,7 @@ export const login = creds => dispatch => {
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILED, payload: err })
+      alert('Please register or use correct credentials!')
     })
 }
 
@@ -35,6 +36,7 @@ export const register = creds => dispatch => {
     })
     .catch(err => {
       dispatch({ type: REGISTER_FAILED, payload: err })
+      alert('Something is wrong, please try again')
     })
 }
 
@@ -71,6 +73,7 @@ export const updateUser = (newUser, token) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: UPDATE_USER_FAILED, payload: err.response })
+      alert('Something is wrong, please try again')
     })
 }
 
@@ -89,5 +92,6 @@ export const addProject = (newProject, id, token) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: ADD_PROJECT_FAILED, payload: err.response })
+      alert('Something is wrong, please try again')
     })
 }
