@@ -52,9 +52,11 @@ export const logout = () => dispatch => {
 }
 
 export const FETCHING_DATA = 'FETCHING_DATA'
+export const FETCHING_DATA_SUCCESS = 'FETCHING_DATA_SUCCESS'
 
 export const getData = data => dispatch => {
   dispatch({ type: FETCHING_DATA, payload: data })
+  dispatch({ type: FETCHING_DATA_SUCCESS })
 }
 
 export const UPDATE_USER_START = 'UPDATE_USER_START'
@@ -93,5 +95,24 @@ export const addProject = (newProject, id, token) => dispatch => {
     .catch(err => {
       dispatch({ type: ADD_PROJECT_FAILED, payload: err.response })
       alert('Something is wrong, please try again')
+    })
+}
+
+export const DELETE_PROJECT_START = 'DELETE_PROJECT_START'
+export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS'
+export const DELETE_PROJECT_FAILED = 'DELETE_PROJECT_FAILED'
+
+export const deleteProject = (userId, projectId, token) => dispatch => {
+  dispatch({ type: DELETE_PROJECT_START })
+  return axios
+    .delete(`${URL}/api/projects/${userId}/${projectId}`, {
+      headers: { Authorization: token }
+    })
+    .then(res => {
+      dispatch({ type: DELETE_PROJECT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PROJECT_FAILED, payload: err.response })
+      alert('Failed to delete project, please try again')
     })
 }
