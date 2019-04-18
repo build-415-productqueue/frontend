@@ -82,6 +82,7 @@ class Project extends Component {
   }
 
   render() {
+    const user = JSON.parse(localStorage.getItem('data'))
     return (
       <div className="accform">
         <fieldset disabled={this.state.disabled}>
@@ -116,14 +117,20 @@ class Project extends Component {
             </span>
 
             <label htmlFor="status"> Status:</label>
-            <input
-              type="text"
+            <select
               id="status"
               name="status"
-              onChange={this.changeHandler}
-              defaultValue={this.state.project.status}
               disabled={this.state.disabled}
-            />
+              value={this.state.project.status}
+              onChange={this.changeHandler}
+            >
+              <option defaultValue>Select Type</option>
+              <option>Pending</option>
+              {user.role === 'admin' ? <option>Approved</option> : null}
+              {user.role === 'admin' ? <option>Denied</option> : null}
+              {user.role === 'admin' ? <option>Working</option> : null}
+              {user.role === 'user' ? <option>Complete</option> : null}
+            </select>
 
             <label htmlFor="description"> Description:</label>
             <textarea
@@ -158,7 +165,7 @@ class Project extends Component {
               disabled={this.state.disabled}
             />
 
-            <label htmlFor="heroku"> Heroku App:</label>
+            <label htmlFor="heroku"> Deployed App:</label>
             <input
               type="text"
               id="heroku"
