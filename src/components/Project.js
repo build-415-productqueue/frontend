@@ -10,9 +10,9 @@ class Project extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      newLink: false,
       disabled: true,
       project: {},
+      newLink: false,
       linkForm: {
         link_type: '',
         link_href: ''
