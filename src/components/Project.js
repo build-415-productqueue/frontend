@@ -11,37 +11,42 @@ class Project extends Component {
     super(props)
     this.state = {
       disabled: true,
-      info: {},
-      project: {
-        projectTitle: '',
-        submittedBy: '',
-        company: '',
-        description: '',
-        status: '',
-        dateSubmitted: '',
-        lastUpdated: '',
-        links: '',
-        comments: []
-      }
+      project: {}
+      // info: {},
+      // project: {
+      //   projectTitle: '',
+      //   submittedBy: '',
+      //   company: '',
+      //   description: '',
+      //   status: '',
+      //   dateSubmitted: '',
+      //   lastUpdated: '',
+      //   links: '',
+      //   comments: []
+      // }
     }
   }
 
   componentDidMount() {
-    const token = localStorage.getItem('token')
-    const user = JSON.parse(localStorage.getItem('data'))
-    const projectId = this.props.match.params.id
-    axios
-      .get(`${URL}/api/projects/${user.id}/${projectId}`, {
-        headers: {
-          Authorization: token
-        }
-      })
-      .then(res => {
-        console.log(res.data)
-        this.setState({
-          info: res.data
+    if (this.props.location.state && this.props.location.state.card) {
+      this.setState({ project: this.props.location.state.card })
+    } else {
+      const token = localStorage.getItem('token')
+      const user = JSON.parse(localStorage.getItem('data'))
+      const projectId = this.props.match.params.id
+      axios
+        .get(`${URL}/api/projects/${user.id}/${projectId}`, {
+          headers: {
+            Authorization: token
+          }
         })
-      })
+        .then(res => {
+          console.log(res.data)
+          this.setState({
+            info: res.data
+          })
+        })
+    }
   }
 
   changeHandler = e => {
@@ -56,23 +61,23 @@ class Project extends Component {
   editHandler = () => {
     if (!this.state.disabled) {
       this.setState({
-        project: {
-          projectTitle: '',
-          submittedBy: '',
-          company: '',
-          description: '',
-          status: '',
-          dateSubmitted: '',
-          lastUpdated: '',
-          links: '',
-          comments: []
-        },
         disabled: true
       })
     } else {
       this.setState({
         disabled: false
       })
+    }
+  }
+
+  updateCheck = () => {
+    if (
+      !this.state.project.updated_at ||
+      this.state.project.created_at === this.state.project.updated_at
+    ) {
+      return false
+    } else {
+      return true
     }
   }
 
@@ -88,29 +93,37 @@ class Project extends Component {
               {this.state.disabled ? 'EDIT' : 'CANCEL'}
             </p>
 
-            <h2>{this.state.info.name}</h2>
-            <p>
+            <h2>{this.state.project.name}</h2>
+
+            <h6 htmlFor="submittedBy">
+              {this.state.project.first_name} {this.state.project.last_name},{' '}
+              {this.state.project.company}{' '}
+            </h6>
+
+            <span>
               {' '}
-              Date created:{' '}
+              Created:{' '}
               {moment(
-                this.state.info.created_at,
+                this.state.project.created_at,
                 'YYYY-MM-DDTkk:mm:ss.SSSZ'
-              ).format('MMMM Do YYYY')}{' '}
-              | Last Updated:
-            </p>
+              ).format('MMMM Do, YYYY')}
+              {this.updateCheck()
+                ? ` | ${moment(
+                    this.state.project.updated_at,
+                    'YYYY-MM-DDTkk:mm:ss.SSSZ'
+                  ).format('MMMM Do, YYYY')}`
+                : null}
+            </span>
+
             <label htmlFor="status"> Status:</label>
             <input
               type="text"
               id="status"
               name="status"
               onChange={this.changeHandler}
-              defaultValue={this.state.info.status}
+              defaultValue={this.state.project.status}
               disabled={this.state.disabled}
             />
-
-            <h6 htmlFor="submittedBy">Submitted By: </h6>
-
-            <h6 htmlFor="company">Company:</h6>
 
             <label htmlFor="description"> Description:</label>
             <textarea
@@ -119,11 +132,11 @@ class Project extends Component {
               id="description"
               name="description"
               onChange={this.changeHandler}
-              defaultValue={this.state.info.description}
+              value={this.state.project.description}
               disabled={this.state.disabled}
             />
 
-            <h2> Project Links </h2>
+            <h4> Project Links </h4>
 
             <label htmlFor="links"> Links:</label>
             <input
@@ -131,7 +144,7 @@ class Project extends Component {
               id="links"
               name="links"
               onChange={this.changeHandler}
-              defaultValue={this.state.info.links}
+              defaultValue={this.state.project.links}
               disabled={this.state.disabled}
             />
 
@@ -141,7 +154,7 @@ class Project extends Component {
               id="github"
               name="github"
               onChange={this.changeHandler}
-              defaultValue={this.state.info.github}
+              defaultValue={this.state.project.github}
               disabled={this.state.disabled}
             />
 
@@ -151,7 +164,7 @@ class Project extends Component {
               id="heroku"
               name="heroku"
               onChange={this.changeHandler}
-              defaultValue={this.state.info.heroku}
+              defaultValue={this.state.project.heroku}
               disabled={this.state.disabled}
             />
             {this.state.disabled ? null : <button type="submit">Submit</button>}

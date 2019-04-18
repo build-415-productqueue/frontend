@@ -37,6 +37,10 @@ div .container .projectlist .projectcard {
     box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
+div .container .projectlist .projectcard:hover {
+    box-shadow: 0 0px 3px 0 rgba(160, 1, 0, 0.2);
+}
+
 div .container .projectlist .projectcard span { 
     margin: 0;
     font-weight: normal;

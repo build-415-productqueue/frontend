@@ -90,12 +90,9 @@ div .accform form input {
     width: 50%;
 }
 
-div .accform form input:disabled {
+div .accform form input:disabled, textarea:disabled {
     border-color: white;
     background: white;
-    color: #a00100;
-    font-size: 20px;
-    font-weight: bold;
     padding-left: 0;
 }
 
@@ -122,8 +119,4 @@ div .accform form button {
 div .accform form button:hover {
     background: #333;
     border-color: #333;
-}
-
-.description {
-   
 }
