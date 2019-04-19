@@ -7,7 +7,7 @@ div .container {
     padding: 0px 75px;
     margin: 150px 0;
     max-width: 100%;
-    min-height: 350px;
+    min-height: 50vh;
 }
 .container h1 {
 justify-self: start;
