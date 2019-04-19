@@ -65,8 +65,11 @@ class AddProjectForm extends Component {
       description: this.state.input.description,
       links: Object.values(this.state.input.links)
     }
-    this.props.addProject(project, this.state.userId, this.state.token)
-    this.props.history.push('/dashboard')
+    this.props
+      .addProject(project, this.state.userId, this.state.token)
+      .then(() => {
+        this.props.history.push('/dashboard')
+      })
   }
 
   handleChanges = e => {
