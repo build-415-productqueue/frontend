@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getData } from './actions'
+import ScrollToTop from './components/ScrollToTop'
 
 class App extends Component {
   componentDidMount() {
@@ -24,21 +25,27 @@ class App extends Component {
     const RouterNav = withRouter(Nav)
     return (
       <Router>
-        <div className="App">
-          <RouterNav />
-          <Route exact path="/" component={RegistrationForm} />
-          <Route path="/login" component={LoginForm} />
-          <PrivateRoute exact path="/account" component={Account} />
-          <PrivateRoute exact path="/dashboard" component={DashBoard} />
-          <PrivateRoute
-            exact
-            path="/add-project"
-            component={AddProjectForm}
-            props={this.props}
-          />
-          <PrivateRoute exact path="/project-details/:id" component={Project} />
-          <Footer />
-        </div>
+        <ScrollToTop>
+          <div className="App">
+            <RouterNav />
+            <Route exact path="/" component={RegistrationForm} />
+            <Route path="/login" component={LoginForm} />
+            <PrivateRoute exact path="/account" component={Account} />
+            <PrivateRoute exact path="/dashboard" component={DashBoard} />
+            <PrivateRoute
+              exact
+              path="/add-project"
+              component={AddProjectForm}
+              props={this.props}
+            />
+            <PrivateRoute
+              exact
+              path="/project-details/:id"
+              component={Project}
+            />
+            <Footer />
+          </div>
+        </ScrollToTop>
       </Router>
     )
   }
